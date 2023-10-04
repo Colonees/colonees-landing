@@ -1,0 +1,22 @@
+.white-button {
+    display: inline-flex;
+    height: 50px;
+    padding: 15px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; 
+    flex-shrink: 0;
+    border-radius: 8px;
+    ;
+text-align: center;
+font-family: 'Inter V';
+font-style: normal;
+font-weight: 600;
+line-height: 30px; /* 187.5% */
+white-space: nowrap; /* Prevent text from wrapping */
+    }
+    
+    .custom-button:hover {
+      background-color: #0056b3; /* Change color on hover */
+    }
+    

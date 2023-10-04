@@ -1,0 +1,32 @@
+
+
+.image-carousel-container {
+    max-width: 100%;
+    width:'100%';
+    margin: 0 auto;
+    margin-top:'50px';
+    overflow: hidden; /* Hide overflow to clip the images */
+  }
+  
+  .image-carousel {
+    display: flex; /* Display images in a row */
+    animation: carousel 25s linear infinite; /* Adjust the duration (15s) as needed */
+  }
+  
+  .image {
+   width:'20%'; /* Set the image height */
+    max-width: 20%;
+    height: auto;
+    margin-right: 20px;
+    transition: transform 0.5s ease-in-out; /* Add a smooth transition effect */
+  }
+  
+  @keyframes carousel {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%); /* Move images to the left by 50% of their width */
+    }
+  }
+  

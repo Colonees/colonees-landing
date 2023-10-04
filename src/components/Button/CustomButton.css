@@ -1,0 +1,23 @@
+.custom-button {
+  display: flex;
+  padding: 15px 20px;
+  justify-content: center;
+  align-items: center;
+  border: #FFF;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #E93223;
+  color: #FFF;
+text-align: center;
+font-family: Inter V;
+font-style: normal;
+font-weight: 600;
+line-height: 30px; /* 187.5% */
+white-space: nowrap; /* Prevent text from wrapping */
+  }
+  
+  .custom-button:hover {
+    background-color: #E93223; /* Change color on hover */
+  }
+  
