@@ -84,7 +84,8 @@ const Hero = ({ imageUrl }) => {
             fontSize: {
               xs: "48px", // Font size for extra small screens
               sm: "48px", // Font size for small screens
-              md: "80px", // Font size for medium screens
+              md: "60px", // Font size for medium screens
+              lg:"80px"
             },
           }}
         >
