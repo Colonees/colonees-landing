@@ -75,11 +75,12 @@ const Scales = () => {
         Join our waitlist today to be among the first to receive the offers of joining early!
       </Typography>
       <Box style={buttonContainerStyle}>
-        <TextField
-          label="Enter Email"
-          variant="outlined"
-          style={textFieldStyle}
-        />
+      <TextField
+  label="Enter Email"
+  variant="outlined"
+  style={{ border: 'none', ...textFieldStyle }}
+/>
+
         <CustomButton text="Join waitlist" fontSize="16px" height="55px" sx={{
 maxWidth:'100%',
 width: {
@@ -89,7 +90,7 @@ width: {
   lg: "70%",
 },
         }}>
-          join waitlist
+          Join waitlist
         </CustomButton>
       </Box>
     </Box>
