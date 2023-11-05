@@ -57,12 +57,6 @@ const Hero = ({ imageUrl }) => {
     maxWidth: "100%",
     marginTop: "-10px", // You can adjust the spacing
   };
-  const boxContainerStyle = {
-    display: 'flex',
-    justifyContent: 'center', // Center horizontally
-    alignItems: 'center', // Center vertically
-   
-  };
   const theme = useTheme();
 
   const isSmallScreen = useMediaQuery('(max-width:900px)');
@@ -73,8 +67,7 @@ const Hero = ({ imageUrl }) => {
           maxWidth:'100%',  width: {
             xs: "85%", // Font size for extra small screens
             sm: "80%", // Font size for small screens
-            md: "74%", // Font size for medium screens
-            lg:"60%"
+            md: "70%", // Font size for medium screens
           },
         }}>
         <Typography
@@ -89,16 +82,9 @@ const Hero = ({ imageUrl }) => {
           }}
         >
           AI for building and managing winning{" "}
-         <span style={redText}>teams</span>
-         
-         
+          <span style={redText}>teams</span>
         </Typography>
-        <Box sx={{ marginLeft: {
-              xs: "70%", // Font size for extra small screens
-              sm: "60%", // Font size for small screens
-              md: "60%",
-              lg: "70%" // Font size for medium screens
-            }, maxWidth: "100%", width: "30%" }}>
+        <Box sx={{ marginLeft: "70%", maxWidth: "100%", width: "30%" }}>
           <img src={SolutionsSVG} alt="Solutions" style={svgStyle} />
         </Box>
        
@@ -110,8 +96,7 @@ const Hero = ({ imageUrl }) => {
             md: "40%", // Font size for medium screens
           },
         }}>
-          <div style={boxContainerStyle}>
-          <Typography
+        <Typography
           variant="h4"
           style={tetStyle}
           sx={{
@@ -120,28 +105,13 @@ const Hero = ({ imageUrl }) => {
               sm: "16px", // Font size for small screens
               md: "20px", // Font size for medium screens
             },
-            maxWidth:'100%', 
-             width: {
-              xs: "91%", // Font size for extra small screens
-              sm: "91%", // Font size for small screens
-              md: "100%", // Font size for medium screens
-              lg:"100%"
-            },
-           
            
           }}
         >
         Collaborate with us as we build the most intelligent system out of Africa that will redefine the hiring and global work process. 
         </Typography>
-        
-          </div>
         </Box>
-        <Box sx={{ marginTop: "50px", maxWidth: "100%",  width: {
-              xs: "93%", // Font size for extra small screens
-              sm: "93%", // Font size for small screens
-              md: "80%", // Font size for medium screens
-              lg:"60%"
-            }, }}>
+        <Box sx={{ marginTop: "50px", maxWidth: "100%", width: "70%" }}>
           <img
             src={Group}
             alt="Groups"
@@ -150,16 +120,16 @@ const Hero = ({ imageUrl }) => {
         </Box>
         {!isSmallScreen && (
         <Box style={buttonContainerStyle} sx={{gap:'10px', maxwidth:'100%', width:'50%'}}>
-        <WhiteButton text="Learn more" fontSize="16px" width="15%" borderColor=" 1px solid #E93223" fontColor="red" />
-        <CustomButton text="join waitlist" fontSize="16px" width="15%" height="50px" >
-          Join waitlist
+        <WhiteButton text="learn more" fontSize="16px" width="20%" borderColor=" 1px solid #E93223" fontColor="red" />
+        <CustomButton text="join waitlist" fontSize="16px" width="20%" height="50px" >
+          join waitlist
         </CustomButton>
         </Box>)}
         {isSmallScreen && (
         <Box style={buttonContainerStyle} sx={{gap:'10px', maxwidth:'100%', width:'50%'}}>
-        <WhiteButton text="Learn more" fontSize="14px" width="30%" borderColor=" 1px solid #E93223" fontColor="red" />
-        <CustomButton text="Join waitlist" fontSize="14px" width="30%" height="50px" >
-          Join waitlist
+        <WhiteButton text="learn more" fontSize="16px" width="40%" borderColor=" 1px solid #E93223" fontColor="red" />
+        <CustomButton text="join waitlist" fontSize="16px" width="40%" height="50px" >
+          join waitlist
         </CustomButton>
         </Box>)}
       </div>

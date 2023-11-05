@@ -11,7 +11,15 @@ import Frame3 from "../assets/Frame3.png";
 import Frame4 from "../assets/Frame4.png";
 
 const MyComponent = () => {
-  
+  const boxStyle = {
+    borderRadius: "30px",
+    background: "#F6F6F6",
+    padding: "20px",
+    width: "100%", // Make the box width responsive
+    textAlign: "center",
+    height: "369px",
+    marginBottom: "20px",
+  };
 
   const svgStyle = {
     width: "80px",
@@ -35,21 +43,13 @@ const MyComponent = () => {
 
   const responsiveImageStyle = {
     maxWidth: "100%", // Make the image width responsive
-    width:'100%',
     height: "auto", // Maintain aspect ratio
-  };
-  const boxContainerStyle = {
-    display: 'flex',
-    justifyContent: 'center', // Center horizontally
-    alignItems: 'center', // Center vertically
-   
   };
 
   return (
-    <div style={boxContainerStyle}>
     <Box
       p={2}
-    bgcolor="background.default"
+      bgcolor="background.default"
       minHeight="100vh"
       sx={{
         marginTop: "115px",
@@ -57,23 +57,15 @@ const MyComponent = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        width: {
-          xs: "90%",
-          sm: "90%",
-          md: "85%",
-          lg : "80%",
-        },
-      
       }}
     >
-      <Grid container spacing={2} sx={{ maxWidth: "100%", width: "100%" }}>
+      <Grid container spacing={2} sx={{ maxWidth: "100%", width: "80%" }}>
         <Grid item xs={12} sm={12} md={6}>
-          <Paper elevation={0} sx={{justifyContent:'center'}}>
-            <Box p={2} >
+          <Paper elevation={0}>
+            <Box p={2}>
               <Typography
                 variant="h6"
                 gutterBottom
-                align="center"
                 sx={{
                   color: "#222",
                   fontFamily: "Outfit",
@@ -84,26 +76,17 @@ const MyComponent = () => {
                     md: "34px",
                     lg: "64px",
                   },
-                  width : {
-                    xs : "100%",
-                    sm : "100%",
-                    md : "80%",
-                    lg: "80%",
-                  }, 
                   fontWeight: "400",
-                 
-
-                  textAlign: {
-                    xs: "center",
-                    sm: "center",
-                    md: "left",
-                    lg: "left",
+                  width: {
+                    xs: "100%",
+                    sm: "100%",
+                    md: "90%",
+                    lg: "90%",
                   },
                  
                   maxWidth: "100%",
                   lineHeight: "103%",
                 }}
-                
               >
                 Who can use Colonees AI?{" "}
               </Typography>
@@ -112,29 +95,11 @@ const MyComponent = () => {
                   color: "#222",
                   fontFamily: "Outfit",
                   fontSize: {
-                    xs: "16px",
-                    sm: "16px",
+                    xs: "14px",
+                    sm: "14px",
                     md: "14px",
                     lg: "20px",
                   },
-                  textAlign: {
-                    xs: "center",
-                    sm: "center",
-                    md: "left",
-                    lg: "left",
-                  },
-                  textAlign: {
-                    xs: "center",
-                    sm: "center",
-                    md: "left",
-                    lg: "left",
-                  },
-                  width : {
-                    xs : "100%",
-                    sm : "100%",
-                    md : "50%",
-                    lg: "80%",
-                  }, 
                   fontStyle: "normal",
                   fontWeight: "400",
                   lineHeight: "30px",
@@ -148,16 +113,10 @@ const MyComponent = () => {
                   color: "#222",
                   fontFamily: "Outfit",
                   fontSize: {
-                    xs: "16px",
-                    sm: "16px",
+                    xs: "14px",
+                    sm: "14px",
                     md: "14px",
                     lg: "20px",
-                  },
-                  textAlign: {
-                    xs: "center",
-                    sm: "center",
-                    md: "left",
-                    lg: "left",
                   },
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -173,16 +132,10 @@ const MyComponent = () => {
                   color: "#222",
                   fontFamily: "Outfit",
                   fontSize: {
-                    xs: "16px",
-                    sm: "16px",
+                    xs: "14px",
+                    sm: "14px",
                     md: "14px",
                     lg: "20px",
-                  },
-                  textAlign: {
-                    xs: "center",
-                    sm: "center",
-                    md: "left",
-                    lg: "left",
                   },
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -237,7 +190,6 @@ const MyComponent = () => {
         </Grid>
       </Grid>
     </Box>
-    </div>
   );
 };
 

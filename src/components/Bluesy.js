@@ -4,22 +4,16 @@ import frame22 from '../assets/frame22.png'
 import CustomButton from './Button/CustomButton'
 import './Button/CustomButton.css'
 function Bluesy() {
-  const boxContainerStyle = {
-    display: 'flex',
-    justifyContent: 'center', // Center horizontally
-    alignItems: 'center', // Center vertically
-   
-  };
     const boxStyle = {
         backgroundColor:'#FFE7E5',
         display: 'flex',
         justifyContent: 'center', // Center horizontally
         alignItems: 'center',
-       
+        width:'80%',
         maxwidth:'100%',
         height:'623px',
         borderRadius:'50px',
-        
+        marginLeft:'8%',
     };
 
     const theme = useTheme();
@@ -29,24 +23,11 @@ function Bluesy() {
   return (
     <div>
         <Box sx={{marginTop:'60px'}}>
-        <div style={boxContainerStyle}>
-        <Box style={boxStyle} sx={{
-          width: {
-            xs: "90%",
-            sm: "90%",
-            md: "85%",
-            lg : "80%",
-          }
-        }}>
+        <Box style={boxStyle}>
         <Grid container spacing={2} sx={{ maxWidth: "100%", width: "100%",  }}>
         <Grid item xs={12} sm={12} md={6}>
          
-            <Box p={2} sx={{  marginLeft: {
-                    xs: "5px",
-                    sm: "10px",
-                    md: "20px",
-                    lg: "40px",
-                  },}}>
+            <Box p={2} sx={{ marginLeft:'40px'}}>
               <Typography
                 variant="h6"
                 gutterBottom
@@ -59,27 +40,15 @@ function Bluesy() {
                     md: "34px",
                     lg: "64px",
                   },
-                  textAlign: {
-                    xs: "center",
-                    sm: "center",
-                    md: "left",
-                    lg: "left",
-                  },
-                  width : {
-                    xs : "100%",
-                    sm : "100%",
-                    md : "50%",
-                    lg: "70%",
-                  }, 
                   fontWeight: "400",
-                 
+                  width: "90%",
                   maxWidth: "100%",
                   lineHeight: "103%",
                   
                 }}
               >
                Join as a 
-Talent{" "}
+Business{" "}
               </Typography>
               <Typography
                 sx={{
@@ -90,12 +59,6 @@ Talent{" "}
                     sm: "14px",
                     md: "14px",
                     lg: "20px",
-                  },
-                  textAlign: {
-                    xs: "center",
-                    sm: "center",
-                    md: "left",
-                    lg: "left",
                   },
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -111,8 +74,8 @@ Talent{" "}
               </CustomButton>
               </Box>)}
               {isSmallScreen && (
-              <Box sx={{maxWidth:'100%', width:'100%', display: 'flex', justifyContent: 'center' }}>
-              <CustomButton text="Join waitliist" fontSize="14px" width="40%" height="50px">
+              <Box sx={{maxWidth:'100%', width:'100%'}}>
+              <CustomButton text="Join waitliist" fontSize="14px" width="50%" height="50px">
                 join waitlist
               </CustomButton>
               </Box>)}
@@ -134,8 +97,6 @@ Talent{" "}
         </Grid>
       </Grid>
         </Box>    
-        </div>
-       
         </Box>
     </div>
   )

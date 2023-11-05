@@ -3,59 +3,18 @@ import { Box, Grid, Typography, Button, TextField, Container, Checkbox, InputAdo
 import SolutionsSVG from '../../assets/vector-12.svg';
 import CustomButton from '../Button/CustomButton';
 import '../Button/CustomButton.css'
-import { useState } from 'react';
-import axios from 'axios';
 
-
+// Import your icon components here
+import EmailIcon from '@mui/icons-material/Email';
+import PersonIcon from '@mui/icons-material/Person';
+import WorkIcon from '@mui/icons-material/Work';
 
 function Business() {
-  const [formData, setFormData] = useState({
-    full_name: '',
-    email: '',
-    business_name: '',
-    designation: '',
-    subscribe: false, // To track if the user wants to subscribe
-  });
-  const handleFieldChange = (fieldName, event) => {
-    setFormData({
-      ...formData,
-      [fieldName]: event.target.value,
-    });
-  };
-
-  const handleSubmit = () => {
-    axios
-      .post('https://colonees-backend2023-de3e223a18ff.herokuapp.com/api/business-waitlist/', {
-        full_name: formData.full_name,
-        email: formData.email,
-        business_name: formData.business_name,
-        designation: formData.designation,
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          // Handle success, e.g., show a success message or redirect the user
-          console.log('Form data sent successfully');
-        } else {
-          // Handle errors, e.g., show an error message
-          console.error('Error sending form data');
-        }
-      })
-      .catch((error) => {
-        // Handle network errors
-        console.error('Network error:', error);
-        // Display an error message to the user
-      });
-  };
-  
-  
-  
   const boxSyle = {
-    backgroundColor: '#F6F6F6',
+    backgroundColor: 'white',
     width: '100%',
     maxWidth: '100%',
     height: 'auto',
-
-    
   };
 
   const buttonContainerStyle = {
@@ -77,43 +36,19 @@ function Business() {
     maxWidth: '100%',
     marginTop: '20px', // You can adjust the spacing
   };
-  const inputFieldStyle = {
-    backgroundColor: 'white',
-  };
-  const labelStyle = {
-    color: '#1E293B',
-    fontFamily: 'Outfit',
-    fontSize: '16px',
-    fontStyle: 'normal',
-    fontWeight: '400',
-    lineHeight: '140.625%', /* 19.688px */
-  };
-  const checkboxStyle = {
-    color: 'red', // Set the color to red
-    '&.Mui-checked': {
-      color: 'red', // Set the color to red when checked
-    },
-    alignItems: 'center',
-  };
-
   return (
     <div>
       <Box style={boxSyle}>
-        <Box sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex', }}>
+        <Box sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
           <Typography
             sx={{
               color: 'black',
               fontFamily: 'Outfit',
-              fontSize: {
-                xs:"25px",
-                sm: "30px",
-                md: "40px",
-                lg: "48px",
-              },
+              fontSize: '48px',
               fontStyle: 'normal',
               fontWeight: '400',
               lineHeight: '103%', /* 65.92px */
-              marginTop: '68px',
+              marginTop: '88px',
             }}
           >
             Join as a <span style={redText}>Business</span>
@@ -124,12 +59,11 @@ function Business() {
         </Box>
         <Container>
           <Box>
-            <Box sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex', }}>
             <Typography
               sx={{
                 color: 'black',
                 fontFamily: 'Outfit',
-                fontSize: '22px',
+                fontSize: '24px',
                 fontStyle: 'normal',
                 fontWeight: '400',
                 lineHeight: '103%',
@@ -138,9 +72,7 @@ function Business() {
             >
               We need your information
             </Typography>
-            </Box>
-           
-            <Grid container spacing={2} sx={{ marginTop: '40px' }} >
+            <Grid container spacing={2} sx={{ marginTop: '40px' }}>
               <Grid item xs={12} sm={6}>
                 <Box style={buttonContainerStye}>
                   <Typography
@@ -152,7 +84,6 @@ function Business() {
                       fontWeight: '400',
                       lineHeight: '103%',
                     }}
-                    
                   >
                     Full name
                   </Typography>
@@ -160,12 +91,13 @@ function Business() {
                     label="John doe"
                     variant="outlined"
                     fullWidth
-                    InputLabelProps={{ style: labelStyle }}
                     InputProps={{
-                      style: inputFieldStyle
+                        endAdornment: (
+                        <InputAdornment position="end">
+                          <PersonIcon />
+                        </InputAdornment>
+                      ),
                     }}
-                    value={formData.full_name}
-        onChange={(e) => handleFieldChange('full_name', e)}
                     sx={{ marginTop: '10px' }}
                   />
                 </Box>
@@ -188,12 +120,13 @@ function Business() {
                     label="Business Name"
                     variant="outlined"
                     fullWidth
-                    InputLabelProps={{ style: labelStyle }}
                     InputProps={{
-                      style: inputFieldStyle
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <WorkIcon />
+                        </InputAdornment>
+                      ),
                     }}
-                    value={formData.business_name}
-                    onChange={(e) => handleFieldChange('business_name', e)}
                     sx={{ marginTop: '10px' }}
                   />
                 </Box>
@@ -219,12 +152,13 @@ function Business() {
                     label="JOhnDoe@email.com"
                     variant="outlined"
                     fullWidth
-                    InputLabelProps={{ style: labelStyle }}
                     InputProps={{
-                      style: inputFieldStyle
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <EmailIcon />
+                        </InputAdornment>
+                      ),
                     }}
-                    value={formData.email}
-                    onChange={(e) => handleFieldChange('email', e)}
                     sx={{ marginTop: '10px' }}
                   />
                 </Box>
@@ -248,18 +182,19 @@ function Business() {
                     label="Designation"
                     variant="outlined"
                     fullWidth
-                    InputLabelProps={{ style: labelStyle }}
                     InputProps={{
-                      style: inputFieldStyle
+                      endAdornment: (
+                        <InputAdornment position="end">
+                           <PersonIcon />
+                        </InputAdornment>
+                      ),
                     }}
-                    value={formData.designation}
-        onChange={(e) => handleFieldChange('designation', e)}
                     sx={{ marginTop: '10px' }}
                   />
                 </Box>
               </Grid>
             </Grid>
-            <Grid container spacing={2} sx={{ marginTop: '20px', }}>
+            <Grid container spacing={2} sx={{ marginTop: '20px' }}>
               <Grid item xs={12} sm={6}>
                 <Box style={buttonContainerStye}>
                   <Typography
@@ -273,21 +208,16 @@ function Business() {
                       marginTop: '20px',
                     }}
                   >
-                   <Checkbox
-  sx={checkboxStyle}
- 
-/>
-
+                    <Checkbox />
                     Yes, I would like to receive email and text messages with news from Colonees.
                   </Typography>
                 </Box>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Box style={buttonContainerStye} sx={{ marginTop:'20px'}}>
-                <CustomButton fontSize="20px" width="100%" height="50px" onClick={handleSubmit}>
-  Join Waitlist
-</CustomButton>
-
+                <CustomButton  fontSize="20px" width="100%" height="50px">
+                  join waitlist
+                  </CustomButton>
                 </Box>
               </Grid>
             </Grid>
