@@ -21,7 +21,7 @@ function Harsh() {
         display: 'flex',
         justifyContent: 'space-between', // To arrange images in a row with space in between
         alignItems: 'center', // To center images vertically
-        width: '70%', // Adjust this value to control the width of the images
+       // Adjust this value to control the width of the images
         maxWidth:'100%',
        
       };
@@ -36,7 +36,12 @@ function Harsh() {
   return (
     <div>
          <Box style={blackBoxStyle}>
-    <Box style={imageContainerStyle}>
+    <Box style={imageContainerStyle} sx={{ width: {
+              xs: "93%", // Font size for extra small screens
+              sm: "93%", // Font size for small screens
+              md: "80%", // Font size for medium screens
+              lg:"60%"
+            },}}>
       <img src={Image1} alt="Image 1" style={imageStyle} />
       <img src={Image2} alt="Image 2" style={imageStyle} />
       <img src={Image3} alt="Image 3" style={imageStyle} />
