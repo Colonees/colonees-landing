@@ -12,7 +12,7 @@ function Talents() {
   const [formData, setFormData] = useState({
     full_name: '',
     email: '',
-    business_name: '',
+    industry: '',
     designation: '',
     subscribe: false, // To track if the user wants to subscribe
   });
