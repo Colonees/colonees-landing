@@ -74,7 +74,7 @@ const Hero = ({ imageUrl }) => {
             xs: "85%", // Font size for extra small screens
             sm: "80%", // Font size for small screens
             md: "74%", // Font size for medium screens
-            lg:"60%"
+            lg:"70%"
           },
         }}>
         <Typography
