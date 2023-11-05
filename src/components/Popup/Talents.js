@@ -30,6 +30,10 @@ function Talents() {
         email: formData.email,
         industry: formData.industry,
         designation: formData.designation,
+      }, {
+        headers: {
+          'Origin':'https://colonees.com'
+        }
       })
       .then((response) => {
         if (response.status === 200) {
