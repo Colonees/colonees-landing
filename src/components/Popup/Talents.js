@@ -4,7 +4,7 @@ import SolutionsSVG from '../../assets/vector-12.svg';
 import CustomButton from '../Button/CustomButton';
 import '../Button/CustomButton.css'
 import { useState } from 'react';
-import axios from 'axios';
+
 
 
 
@@ -24,33 +24,35 @@ function Talents() {
   };
 
   const handleSubmit = () => {
-    axios
-      .post('https://colonees-backend2023-de3e223a18ff.herokuapp.com/api/talent-waitlist/', {
+    fetch('https://colonees-backend2023-de3e223a18ff.herokuapp.com/api/talent-waitlist/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // No need to set the 'Origin' header; it's automatically handled by the browser
+      },
+      body: JSON.stringify({
         full_name: formData.full_name,
         email: formData.email,
         industry: formData.industry,
         designation: formData.designation,
-      }, {
-        headers: {
-          'Origin':'https://colonees.com'
-        }
-      })
+      }),
+    })
       .then((response) => {
-        if (response.status === 200) {
-          // Handle success, e.g., show a success message or redirect the user
-          console.log('Form data sent successfully');
-        } else {
-          // Handle errors, e.g., show an error message
-          console.error('Error sending form data');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
+        return response.json();
+      })
+      .then((data) => {
+        // Handle the success response, e.g., show a success message or redirect the user
+        console.log('Form data sent successfully');
       })
       .catch((error) => {
-        // Handle network errors
-        console.error('Network error:', error);
+        // Handle errors, including network errors
+        console.error('Fetch error:', error);
         // Display an error message to the user
       });
   };
-  
   
   
   const boxSyle = {
