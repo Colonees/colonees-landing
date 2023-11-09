@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Box, Grid, Typography, Button, TextField, Container, Checkbox, InputAdornment } from '@mui/material';
 import SolutionsSVG from '../../assets/vector-12.svg';
 import CustomButton from '../Button/CustomButton';
 import '../Button/CustomButton.css'
-import { useState } from 'react';
-import axios from 'axios';
+
+
 
 
 
@@ -16,6 +16,14 @@ function Business() {
     designation: '',
     subscribe: false, // To track if the user wants to subscribe
   });
+  const [logMessages, setLogMessages] = useState([]);
+ 
+  const logContainerRef = useRef(null);
+
+  // Function to add log messages to the state
+  const addToLog = (message) => {
+    setLogMessages((prevMessages) => [...prevMessages, message]);
+  };
   const handleFieldChange = (fieldName, event) => {
     setFormData({
       ...formData,
@@ -37,23 +45,19 @@ function Business() {
         designation: formData.designation,
       }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // Handle the success response, e.g., show a success message or redirect the user
-        console.log('Form data sent successfully');
-      })
-      .catch((error) => {
-        // Handle errors, including network errors
-        console.error('Fetch error:', error);
-        // Display an error message to the user
-      });
-  };
-  
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      addToLog('Form data sent successfully'); // Log message
+    })
+    .catch((error) => {
+      addToLog(`Fetch error: ${error}`); // Log error message
+    });
+};
   
   
   const boxSyle = {
@@ -105,6 +109,11 @@ function Business() {
 
   return (
     <div>
+       <div ref={logContainerRef}>
+        {logMessages.map((message, index) => (
+          <div key={index}>{message}</div>
+        ))}
+      </div>
       <Box style={boxSyle}>
         <Box sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex', }}>
           <Typography
