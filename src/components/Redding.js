@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Grid, Paper, Typography,  useTheme, useMediaQuery } from "@mui/material";
 import frame21 from '../assets/frame21.png';
 import WhiteButton from './Button/WhiteButton';
 import './Button/WhiteButton.css';
+import {
+  Dialog,
+  DialogContent,
+  IconButton
+} from '@mui/material';
+import Business from '../components/Popup/Business';
+import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
 function Bluesy() {
+  const [businessModalOpen, setBusinessModalOpen] = useState(false);
+  
+
+  const handleBusinessModalOpen = () => {
+    setBusinessModalOpen(true); // Open the Business modal
+  };
+
+  const handleBusinessModalClose = () => {
+    setBusinessModalOpen(false); // Close the Business modal
+  }; 
+
+
   const boxContainerStyle = {
     display: 'flex',
     justifyContent: 'center', // Center horizontally
@@ -121,11 +140,15 @@ Business{" "}
               </Typography><br></br>
               {!isSmallScreen && (
               <Box sx={{maxWidth:'100%', width:'100%'}}>
-              <WhiteButton text="Join waitlist" fontSize="14px" width="30%" borderColor=" 1px solid white" fontColor="white" backgroundColor="#E93223" />
+              <WhiteButton  onClick={handleBusinessModalOpen}  fontSize="14px" width="30%" borderColor=" 1px solid white" fontColor="white" backgroundColor="#E93223">
+                Join waitlist
+                </WhiteButton>
               </Box>)}
               {isSmallScreen && (
              <Box sx={{ maxWidth: '100%', width: '100%', display: 'flex', justifyContent: 'center' }}>
-             <WhiteButton text="Join waitlist" fontSize="14px" width="40%" borderColor="1px solid white" fontColor="white" backgroundColor="#E93223" />
+             <WhiteButton  onClick={handleBusinessModalOpen}  fontSize="14px" width="40%" borderColor=" 1px solid white" fontColor="white" backgroundColor="#E93223">
+                Join waitlist
+                </WhiteButton>
          </Box>
          )}
             </Box>
@@ -159,6 +182,28 @@ Business{" "}
           </div>
         
         </Box>
+        <Box sx={{ width: '100%' }}>
+        <Dialog open={businessModalOpen} onClose={handleBusinessModalClose} sx={{ maxWidth: '100%', width:'100%',  }}>
+          <DialogContent sx={{ marginTop: '10px', backgroundColor:'#F6F6F6',  }}>
+            {/* Render the Business component inside the modal */}
+            <Business />
+            <IconButton
+              edge="end"
+              color="inherit"
+              onClick={handleBusinessModalClose}
+              aria-label="close"
+              sx={{
+                position: 'absolute',
+                top: 5,
+                right: 20,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogContent>
+        </Dialog>
+      </Box>
+
     </div>
   )
 }

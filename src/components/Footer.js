@@ -1,14 +1,77 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Box, Grid, Typography, TextField, ThemeProvider, createTheme } from '@mui/material';
 import Logo from '../assets/colonees-logo-11.svg';
 import Image1 from '../assets/social-links.svg';
 import CustomButton from './Button/CustomButton';
 import './Button/CustomButton.css';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Link as RouterLink, animateScroll as scroll } from 'react-scroll';
 
 
 
 function Footer() {
+  const [formData, setFormData] = useState({
+    email: '',
+    subscribe: true,
+  });
+  const [loading, setLoading] = useState(false);
+  const [logMessages, setLogMessages] = useState([]);
+  const logContainerRef = useRef(null);
+
+  const addToLog = (message) => {
+    setLogMessages((prevMessages) => [...prevMessages, message]);
+  };
+
+  const handleFieldChange = (fieldName, event) => {
+    setFormData({
+      ...formData,
+      [fieldName]: event.target.value,
+    });
+  };
+
+  const handleSubmit = () => {
+    setLoading(true);
+
+    fetch('https://colonees-backend2023-de3e223a18ff.herokuapp.com/api/subcriber/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: formData.email,
+        subscribe: formData.subscribe,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        addToLog('Suscribed successfully');
+        // Reload the page after successful form submission
+        window.location.reload();
+      })
+      .catch((error) => {
+        addToLog(`Fetch error: ${error}`);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const scrollToTop = () => {
+    scroll.scrollToTop();
+  };
+
+  const scrollToSection = (sectionId) => {
+    scroll.scrollTo(sectionId, {
+      duration: 800,
+      offset: -100, // Adjust the offset as needed
+      smooth: 'easeInOutQuad',
+    });
+  };
   const boxStyle = {
     backgroundColor: '#0A142F',
     display: 'flex',
@@ -146,14 +209,18 @@ function Footer() {
       sm: '16px', // Font size for small screens
       md: '16px', // Font size for medium screens
     }}}>
-                    Home
+                     <RouterLink to="Hero" smooth={true} offset={-100} duration={800}>
+                Home
+              </RouterLink>
                   </Typography>
                   <Typography variant="h4" style={ttStyle} sx={{marginTop:'42px',fontSize: {
       xs: '14px', // Font size for extra small screens
       sm: '16px', // Font size for small screens
       md: '16px', // Font size for medium screens
     }}}>
-                    About
+    <RouterLink to="why-colonees" smooth={true} offset={-100} duration={800}>
+About
+</RouterLink>
                   </Typography>
                     </Grid>
                     <Grid item xs={6}>
@@ -180,6 +247,12 @@ function Footer() {
               <Grid container justifyContent="center">
                 {/* Third grid */}
                 <Grid item xs={10} style={gridStyle}>
+                <div ref={logContainerRef} style={{ color: 'white' }}>
+  {logMessages.map((message, index) => (
+    <div key={index}>{message}</div>
+  ))}
+</div>
+
                 <Typography variant="h4" style={txtStyle} sx={{fontSize: {
       xs: '14px', // Font size for extra small screens
       sm: '16px', // Font size for small screens
@@ -196,9 +269,11 @@ function Footer() {
         borderColor: 'white', // Set the outline color to white
       },
     }}
+    value={formData.email}
+    onChange={(e) => handleFieldChange('email', e)}
     style={textFieldStyle}
   />
-       <CustomButton text="" fontSize="20px" width="50px" height="58px">
+       <CustomButton onClick={handleSubmit} text="" fontSize="20px" width="50px" height="58px">
        <ArrowForwardIosIcon />
         </CustomButton>
       </Box>

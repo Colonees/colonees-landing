@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Grid, Paper, Typography,  useTheme, useMediaQuery } from "@mui/material";
 import frame22 from '../assets/frame22.png'
 import CustomButton from './Button/CustomButton'
 import './Button/CustomButton.css'
+import {
+  Dialog,
+  DialogContent,
+  IconButton
+} from '@mui/material';
+import Talents from '../components/Popup/Talents';
+import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
 function Bluesy() {
+  const [talentsModalOpen, setTalentsModalOpen] = useState(false);
+  
+
+  const handleTalentsModalOpen = () => {
+    setTalentsModalOpen(true); // Open the Business modal
+  };
+
+  const handleTalentsModalClose = () => {
+    setTalentsModalOpen(false); // Close the Business modal
+  }; 
+
   const boxContainerStyle = {
     display: 'flex',
     justifyContent: 'center', // Center horizontally
@@ -106,13 +124,13 @@ Talent{" "}
               </Typography><br></br>
               {!isSmallScreen && (
               <Box sx={{maxWidth:'100%', width:'100%'}}>
-              <CustomButton text="Join waitliist" fontSize="14px" width="30%" height="50px">
+              <CustomButton onClick={handleTalentsModalOpen} text="Join waitliist" fontSize="14px" width="30%" height="50px">
                 join waitlist
               </CustomButton>
               </Box>)}
               {isSmallScreen && (
               <Box sx={{maxWidth:'100%', width:'100%', display: 'flex', justifyContent: 'center' }}>
-              <CustomButton text="Join waitliist" fontSize="14px" width="40%" height="50px">
+              <CustomButton onClick={handleTalentsModalOpen} text="Join waitliist" fontSize="14px" width="40%" height="50px">
                 join waitlist
               </CustomButton>
               </Box>)}
@@ -137,6 +155,27 @@ Talent{" "}
         </div>
        
         </Box>
+        <Box sx={{ maxWidth: '100%', width: '100%' }}>
+        <Dialog open={talentsModalOpen} onClose={handleTalentsModalClose} sx={{ maxWidth: '100vw' }}>
+          <DialogContent sx={{ marginTop: '10px',backgroundColor:'#F6F6F6', }}>
+            {/* Render the Talents component inside the modal */}
+            <Talents />
+            <IconButton
+              edge="end"
+              color="inherit"
+              onClick={handleTalentsModalClose}
+              aria-label="close"
+              sx={{
+                position: 'absolute',
+                top: 5,
+                right: 20,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogContent>
+        </Dialog>
+      </Box>
     </div>
   )
 }
