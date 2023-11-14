@@ -39,6 +39,7 @@ const Video = () => {
   };
 
   return (
+    <div id="video">
     <Box style={containerStyle}>
       <Typography
         variant="h4"
@@ -69,6 +70,7 @@ const Video = () => {
         )}
       </div>
     </Box>
+    </div>
   );
 };
 

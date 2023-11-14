@@ -1,12 +1,8 @@
-import React from 'react';
-import { Box, Grid, Typography, Button, TextField, Container, Checkbox, InputAdornment } from '@mui/material';
+import React, { useState, useRef } from 'react';
+import { Box, Grid, Typography, TextField, Container, Checkbox, CircularProgress } from '@mui/material';
 import SolutionsSVG from '../../assets/vector-12.svg';
 import CustomButton from '../Button/CustomButton';
-import '../Button/CustomButton.css'
-import { useState } from 'react';
-
-
-
+import '../Button/CustomButton.css';
 
 function Talents() {
   const [formData, setFormData] = useState({
@@ -14,8 +10,16 @@ function Talents() {
     email: '',
     industry: '',
     designation: '',
-    subscribe: false, // To track if the user wants to subscribe
+    subscribe: false,
   });
+  const [loading, setLoading] = useState(false);
+  const [logMessages, setLogMessages] = useState([]);
+  const logContainerRef = useRef(null);
+
+  const addToLog = (message) => {
+    setLogMessages((prevMessages) => [...prevMessages, message]);
+  };
+
   const handleFieldChange = (fieldName, event) => {
     setFormData({
       ...formData,
@@ -24,11 +28,12 @@ function Talents() {
   };
 
   const handleSubmit = () => {
+    setLoading(true);
+
     fetch('https://colonees-backend2023-de3e223a18ff.herokuapp.com/api/talent-waitlist/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // No need to set the 'Origin' header; it's automatically handled by the browser
       },
       body: JSON.stringify({
         full_name: formData.full_name,
@@ -44,36 +49,26 @@ function Talents() {
         return response.json();
       })
       .then((data) => {
-        // Handle the success response, e.g., show a success message or redirect the user
-        console.log('Form data sent successfully');
+        addToLog('Form data sent successfully');
+        // Reload the page after successful form submission
+        window.location.reload();
       })
       .catch((error) => {
-        // Handle errors, including network errors
-        console.error('Fetch error:', error);
-        // Display an error message to the user
+        addToLog(`Fetch error: ${error}`);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
-  
-  
+
   const boxSyle = {
     backgroundColor: '#F6F6F6',
     width: '100%',
     maxWidth: '100%',
     height: 'auto',
-
-    
   };
 
-  const buttonContainerStyle = {
-    display: 'flex',
-    marginTop: '20px',
-    width: '80%',
-    maxWidth: '80%',
-  };
-
-  const buttonContainerStye = {
-   
-  };
+  const buttonContainerStye = {};
 
   const redText = {
     color: '#E93223',
@@ -81,7 +76,7 @@ function Talents() {
   const svgStyle = {
     width: '100%',
     maxWidth: '100%',
-    marginTop: '20px', // You can adjust the spacing
+    marginTop: '20px',
   };
   const inputFieldStyle = {
     backgroundColor: 'white',
@@ -92,33 +87,38 @@ function Talents() {
     fontSize: '16px',
     fontStyle: 'normal',
     fontWeight: '400',
-    lineHeight: '140.625%', /* 19.688px */
+    lineHeight: '140.625%',
   };
   const checkboxStyle = {
-    color: 'red', // Set the color to red
+    color: 'red',
     '&.Mui-checked': {
-      color: 'red', // Set the color to red when checked
+      color: 'red',
     },
     alignItems: 'center',
   };
 
   return (
     <div>
+      <div ref={logContainerRef}>
+        {logMessages.map((message, index) => (
+          <div key={index}>{message}</div>
+        ))}
+      </div>
       <Box style={boxSyle}>
-        <Box sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex', }}>
+        <Box sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
           <Typography
             sx={{
               color: 'black',
               fontFamily: 'Outfit',
               fontSize: {
-                xs:"25px",
-                sm: "30px",
-                md: "40px",
-                lg: "48px",
+                xs: '25px',
+                sm: '30px',
+                md: '40px',
+                lg: '48px',
               },
               fontStyle: 'normal',
               fontWeight: '400',
-              lineHeight: '103%', /* 65.92px */
+              lineHeight: '103%',
               marginTop: '68px',
             }}
           >
@@ -130,23 +130,23 @@ function Talents() {
         </Box>
         <Container>
           <Box>
-            <Box sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex', }}>
-            <Typography
-              sx={{
-                color: 'black',
-                fontFamily: 'Outfit',
-                fontSize: '22px',
-                fontStyle: 'normal',
-                fontWeight: '400',
-                lineHeight: '103%',
-                marginTop: '46px',
-              }}
-            >
-              We need your information
-            </Typography>
+            <Box sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
+              <Typography
+                sx={{
+                  color: 'black',
+                  fontFamily: 'Outfit',
+                  fontSize: '22px',
+                  fontStyle: 'normal',
+                  fontWeight: '400',
+                  lineHeight: '103%',
+                  marginTop: '46px',
+                }}
+              >
+                We need your information
+              </Typography>
             </Box>
-           
-            <Grid container spacing={2} sx={{ marginTop: '40px' }} >
+
+            <Grid container spacing={2} sx={{ marginTop: '40px' }}>
               <Grid item xs={12} sm={6}>
                 <Box style={buttonContainerStye}>
                   <Typography
@@ -158,7 +158,6 @@ function Talents() {
                       fontWeight: '400',
                       lineHeight: '103%',
                     }}
-                    
                   >
                     Full name
                   </Typography>
@@ -168,10 +167,10 @@ function Talents() {
                     fullWidth
                     InputLabelProps={{ style: labelStyle }}
                     InputProps={{
-                      style: inputFieldStyle
+                      style: inputFieldStyle,
                     }}
                     value={formData.full_name}
-        onChange={(e) => handleFieldChange('full_name', e)}
+                    onChange={(e) => handleFieldChange('full_name', e)}
                     sx={{ marginTop: '10px' }}
                   />
                 </Box>
@@ -188,7 +187,7 @@ function Talents() {
                       lineHeight: '103%',
                     }}
                   >
-                   Industry
+                    Industry
                   </Typography>
                   <TextField
                     label="Tech or Non tech"
@@ -196,9 +195,9 @@ function Talents() {
                     fullWidth
                     InputLabelProps={{ style: labelStyle }}
                     InputProps={{
-                      style: inputFieldStyle
+                      style: inputFieldStyle,
                     }}
-                    value={formData.business_name}
+                    value={formData.industry}
                     onChange={(e) => handleFieldChange('industry', e)}
                     sx={{ marginTop: '10px' }}
                   />
@@ -227,7 +226,7 @@ function Talents() {
                     fullWidth
                     InputLabelProps={{ style: labelStyle }}
                     InputProps={{
-                      style: inputFieldStyle
+                      style: inputFieldStyle,
                     }}
                     value={formData.email}
                     onChange={(e) => handleFieldChange('email', e)}
@@ -248,7 +247,7 @@ function Talents() {
                       marginTop: '20px',
                     }}
                   >
-                   Role
+                    Role
                   </Typography>
                   <TextField
                     label="Designation"
@@ -256,16 +255,16 @@ function Talents() {
                     fullWidth
                     InputLabelProps={{ style: labelStyle }}
                     InputProps={{
-                      style: inputFieldStyle
+                      style: inputFieldStyle,
                     }}
                     value={formData.designation}
-        onChange={(e) => handleFieldChange('designation', e)}
+                    onChange={(e) => handleFieldChange('designation', e)}
                     sx={{ marginTop: '10px' }}
                   />
                 </Box>
               </Grid>
             </Grid>
-            <Grid container spacing={2} sx={{ marginTop: '20px', }}>
+            <Grid container spacing={2} sx={{ marginTop: '20px' }}>
               <Grid item xs={12} sm={6}>
                 <Box style={buttonContainerStye}>
                   <Typography
@@ -279,21 +278,16 @@ function Talents() {
                       marginTop: '20px',
                     }}
                   >
-                   <Checkbox
-  sx={checkboxStyle}
- 
-/>
-
+                    <Checkbox sx={checkboxStyle} />
                     Yes, I would like to receive email and text messages with news from Colonees.
                   </Typography>
                 </Box>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Box style={buttonContainerStye} sx={{ marginTop:'20px'}}>
-                <CustomButton fontSize="20px" width="100%" height="50px" onClick={handleSubmit}>
-  Join Waitlist
-</CustomButton>
-
+                <Box style={buttonContainerStye} sx={{ marginTop: '20px' }}>
+                  <CustomButton fontSize="20px" width="100%" height="50px" onClick={handleSubmit} disabled={loading}>
+                    {loading ? <CircularProgress size={24} color="inherit" /> : 'Join Waitlist'}
+                  </CustomButton>
                 </Box>
               </Grid>
             </Grid>

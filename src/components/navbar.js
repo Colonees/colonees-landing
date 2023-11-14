@@ -4,7 +4,9 @@ import {
   DialogContent,
 } from '@mui/material';
 import CustomButton from './Button/CustomButton';
+import CustomBtn from './Button/CustomBtn'
 import './Button/CustomButton.css';
+import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
 
 import {
   AppBar,
@@ -18,16 +20,22 @@ import {
   useMediaQuery,
   Button, 
   Box,// Import Button component
+  Menu,
+  MenuItem,
+  ArrowDropDown,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '../assets/colonees-logo-1.svg';
 import Business from '../components/Popup/Business';
 import Talents from '../components/Popup/Talents';
+import { Link as RouterLink, animateScroll as scroll } from 'react-scroll';
+
 
 
 function Navbar() {
   const is800px = useMediaQuery('(max-width:1000px)');
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [businessModalOpen, setBusinessModalOpen] = useState(false);
   const [talentsModalOpen, setTalentsModalOpen] = useState(false);
 
@@ -37,6 +45,14 @@ function Navbar() {
 
   const handleDrawerClose = () => {
     setDrawerOpen(false);
+  };
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
   };
  
  
@@ -56,14 +72,36 @@ function Navbar() {
     setTalentsModalOpen(false); // Close the Talents modal
   }; 
 
+  
+  const scrollToTop = () => {
+    scroll.scrollToTop();
+  };
+
+  const scrollToSection = (sectionId) => {
+    scroll.scrollTo(sectionId, {
+      duration: 800,
+      offset: -100, // Adjust the offset as needed
+      smooth: 'easeInOutQuad',
+    });
+  };
+
   const typoFont = {
     fontFamily: "Outfit",
+  };
+
+  const typoMenu = {
+    color: '#000',
+    fontFamily: 'Outfit',
+    fontSize: '12px',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    lineHeight: '140.625%',
   }
 
 
 
   return (
-    <div>
+    <div id='Hero'>
       <AppBar
         position="static"
         sx={{
@@ -124,7 +162,9 @@ function Navbar() {
                   }}
                   style={typoFont}
                 >
-                  Why Colonees
+                 <RouterLink to="why-colonees" smooth={true} offset={-100} duration={800}>
+                Why Colonees
+              </RouterLink>
                 </Typography>
               </ListItem>
               <ListItem button onClick={handleBusinessModalOpen} sx={{ fontFamily: 'akira expanded' }}>
@@ -170,24 +210,49 @@ function Navbar() {
                   Talents
                 </Typography>
               </ListItem>
-              <Box sx={{  width: '100%' }}>
-                <Dialog open={businessModalOpen} onClose={handleBusinessModalClose} sx={{ maxWidth: '100%', width:'100%',  }}>
-                  <DialogContent sx={{ marginTop: '10px', backgroundColor:'#F6F6F6',  }}>
-                    {/* Render the Business component inside the modal */}
-                    <Business />
-                  </DialogContent>
-                </Dialog>
-              </Box>
-
-              {/* Talents Modal */}
               <Box sx={{ maxWidth: '100%', width: '100%' }}>
-  <Dialog open={talentsModalOpen} onClose={handleTalentsModalClose} sx={{ maxWidth: '100vw' }}>
-    <DialogContent sx={{ marginTop: '10px',backgroundColor:'#F6F6F6', }}>
-      {/* Render the Talents component inside the modal */}
-      <Talents />
-    </DialogContent>
-  </Dialog>
-</Box>
+        <Dialog open={talentsModalOpen} onClose={handleTalentsModalClose} sx={{ maxWidth: '100vw' }}>
+          <DialogContent sx={{ marginTop: '10px',backgroundColor:'#F6F6F6', }}>
+            {/* Render the Talents component inside the modal */}
+            <Talents />
+            <IconButton
+              edge="end"
+              color="inherit"
+              onClick={handleTalentsModalClose}
+              aria-label="close"
+              sx={{
+                position: 'absolute',
+                top: 5,
+                right: 20,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogContent>
+        </Dialog>
+      </Box>
+      <Box sx={{ width: '100%' }}>
+        <Dialog open={businessModalOpen} onClose={handleBusinessModalClose} sx={{ maxWidth: '100%', width:'100%',  }}>
+          <DialogContent sx={{ marginTop: '10px', backgroundColor:'#F6F6F6',  }}>
+            {/* Render the Business component inside the modal */}
+            <Business />
+            <IconButton
+              edge="end"
+              color="inherit"
+              onClick={handleBusinessModalClose}
+              aria-label="close"
+              sx={{
+                position: 'absolute',
+                top: 5,
+                right: 20,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogContent>
+        </Dialog>
+      </Box>
+
 
               
             </List>
@@ -200,11 +265,38 @@ function Navbar() {
             </IconButton>
           ) : (
             <Box>
-            {/* Responsive button styles */}
-            <CustomButton text="join waitlist" fontSize="12px" width="87px" height="40px" >
-              Join waitlist
+            {/* Responsive button with dropdown */}
+            <CustomButton
+              onClick={handleMenuOpen}
+              variant="outlined"
+              fontSize="12px" width="100%" height="40px"
+              text="join waitlist"
+             
+            >
+             Join waitlist
+           
             </CustomButton>
-            
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+              PaperProps={{
+                style: {
+                  backgroundColor: 'white',
+                  width:'140px',
+                  marginTop:'14px',
+                  padding: '14px 23px 14px 22px',
+                  justifyContent: 'center',
+                  borderRadius: '10px',
+                  boxShadow: '20px 20px 50px 0px rgba(0, 0, 0, 0.10)',
+                  marginRight:'10px'
+
+                },
+              }}
+            >
+              <MenuItem onClick={handleBusinessModalOpen} style={typoMenu}>Join as a Business</MenuItem>
+              <MenuItem onClick={handleTalentsModalOpen} style={typoMenu}>Join as a Talent</MenuItem>
+            </Menu>
           </Box>
           )}
         </Toolbar>
@@ -229,21 +321,22 @@ function Navbar() {
               width: '300px',
             }}
           >
-            <ListItem sx={{ textAlign: 'left' }}>
-              <ListItemText>
-                <Typography
-                  variant="body1"
-                  fontWeight={700}
-                 
-                  sx={{ color: 'black' }}
-                  style={typoFont}
-                >
-                  Why Colonees
-                </Typography>
-              </ListItemText>
-            </ListItem>
+           <ListItem button sx={{ textAlign: 'left' }}>
+  <ListItemText>
+    <Typography
+      variant="body1"
+      fontWeight={700}
+      sx={{ color: 'black' }}
+      style={typoFont}
+    >
+      <RouterLink to="why-colonees" smooth={true} offset={-100} duration={800} onClick={handleDrawerClose}>
+        Why Colonees
+      </RouterLink>
+    </Typography>
+  </ListItemText>
+</ListItem>
             <ListItem button onClick={handleBusinessModalOpen}  sx={{ textAlign: 'left' }}>
-              <ListItemText>
+              <ListItemText onClick={handleDrawerClose}>
                 <Typography
                   variant="body1"
                   fontWeight={700}
@@ -256,7 +349,7 @@ function Navbar() {
               </ListItemText>
             </ListItem>
             <ListItem button onClick={handleTalentsModalOpen} sx={{ textAlign: 'left' }}>
-              <ListItemText>
+              <ListItemText onClick={handleDrawerClose}>
                 <Typography
                   variant="body1"
                   fontWeight={700}
@@ -269,9 +362,30 @@ function Navbar() {
               </ListItemText>
             </ListItem>
             <ListItem  sx={{ textAlign: 'left' }}>
-            <CustomButton text="join waitlist" fontSize="12px" width="87px" height="40px" >
+            <CustomButton  onClick={handleMenuOpen} text="join waitlist" fontSize="12px" width="87px" height="40px" >
               Join waitlist
             </CustomButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+              PaperProps={{
+                style: {
+                  backgroundColor: 'white',
+                  width:'140px',
+                  marginTop:'14px',
+                  padding: '14px 23px 14px 22px',
+                  justifyContent: 'center',
+                  borderRadius: '10px',
+                  boxShadow: '20px 20px 50px 0px rgba(0, 0, 0, 0.10)',
+                  marginRight:'10px'
+
+                },
+              }}
+            >
+              <MenuItem onClick={handleBusinessModalOpen} style={typoMenu}>Join as a Business</MenuItem>
+              <MenuItem onClick={handleTalentsModalOpen} style={typoMenu}>Join as a Talent</MenuItem>
+            </Menu>
             </ListItem>
             {/* ... (other list items with the same textAlign style) */}
           </List>

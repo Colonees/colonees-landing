@@ -1,9 +1,45 @@
-import React from 'react';
-import { Box, Typography, TextField, Button, Container } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, TextField, Button, Container, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
 import CustomButton from './Button/CustomButton'
 import './Button/CustomButton.css'
+import Business from '../components/Popup/Business';
+import Talents from '../components/Popup/Talents';
+import {
+  Dialog,
+  DialogContent,
+  Menu,
+  MenuItem,
+} from '@mui/material';
 
 const Scales = () => {
+  const [businessModalOpen, setBusinessModalOpen] = useState(false);
+  const [talentsModalOpen, setTalentsModalOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleBusinessModalOpen = () => {
+    setBusinessModalOpen(true); // Open the Business modal
+  };
+
+  const handleBusinessModalClose = () => {
+    setBusinessModalOpen(false); // Close the Business modal
+  }; 
+
+  const handleTalentsModalOpen = () => {
+    setTalentsModalOpen(true); // Open the Talents modal
+  };
+
+  const handleTalentsModalClose = () => {
+    setTalentsModalOpen(false); // Close the Talents modal
+  }; 
+
   const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -44,6 +80,16 @@ const Scales = () => {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop:'60px',
+    maxWidth:'100%'
+  };
+
+  const typoMenu = {
+    color: '#000',
+    fontFamily: 'Outfit',
+    fontSize: '12px',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    lineHeight: '140.625%',
   };
 
   return (
@@ -75,23 +121,80 @@ const Scales = () => {
         Join our waitlist today to be among the first to receive the offers of joining early!
       </Typography>
       <Box style={buttonContainerStyle}>
-      <TextField
-  label="Enter Email"
-  variant="outlined"
-  style={{ border: 'none', ...textFieldStyle }}
-/>
-
         <CustomButton text="Join waitlist" fontSize="16px" height="55px" sx={{
-maxWidth:'100%',
-width: {
-  xs: '40%',
-  sm: '50%',
-  md: '60%',
-  lg: "70%",
-},
-        }}>
+          maxWidth:'100%',
+          width: {
+            xs: '40%',
+            sm: '50%',
+            md: '60%',
+            lg: "80%",
+          },
+        }}
+        onClick={handleMenuOpen}>
           Join waitlist
         </CustomButton>
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleMenuClose}
+          PaperProps={{
+            style: {
+              backgroundColor: 'white',
+              width:'140px',
+              marginTop:'14px',
+              padding: '14px 23px 14px 22px',
+              justifyContent: 'center',
+              borderRadius: '10px',
+              boxShadow: '20px 20px 50px 0px rgba(0, 0, 0, 0.10)',
+              marginRight:'10px'
+            },
+          }}
+        >
+          <MenuItem onClick={handleBusinessModalOpen} style={typoMenu}>Join as a Business</MenuItem>
+          <MenuItem onClick={handleTalentsModalOpen} style={typoMenu}>Join as a Talent</MenuItem>
+        </Menu>
+      </Box>
+      <Box sx={{ maxWidth: '100%', width: '100%' }}>
+        <Dialog open={talentsModalOpen} onClose={handleTalentsModalClose} sx={{ maxWidth: '100vw' }}>
+          <DialogContent sx={{ marginTop: '10px',backgroundColor:'#F6F6F6', }}>
+            {/* Render the Talents component inside the modal */}
+            <Talents />
+            <IconButton
+              edge="end"
+              color="inherit"
+              onClick={handleTalentsModalClose}
+              aria-label="close"
+              sx={{
+                position: 'absolute',
+                top: 5,
+                right: 20,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogContent>
+        </Dialog>
+      </Box>
+      <Box sx={{ width: '100%' }}>
+        <Dialog open={businessModalOpen} onClose={handleBusinessModalClose} sx={{ maxWidth: '100%', width:'100%',  }}>
+          <DialogContent sx={{ marginTop: '10px', backgroundColor:'#F6F6F6',  }}>
+            {/* Render the Business component inside the modal */}
+            <Business />
+            <IconButton
+              edge="end"
+              color="inherit"
+              onClick={handleBusinessModalClose}
+              aria-label="close"
+              sx={{
+                position: 'absolute',
+                top: 5,
+                right: 20,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogContent>
+        </Dialog>
       </Box>
     </Box>
   );

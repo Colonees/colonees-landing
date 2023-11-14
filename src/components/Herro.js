@@ -10,6 +10,7 @@ import Frame2 from "../assets/Frame2.png";
 import Frame3 from "../assets/Frame3.png";
 import Frame4 from "../assets/Frame4.png";
 
+
 const MyComponent = () => {
   
 
@@ -46,7 +47,7 @@ const MyComponent = () => {
   };
 
   return (
-    <div style={boxContainerStyle}>
+    <div style={boxContainerStyle} id="why-colonees">
     <Box
       p={2}
     bgcolor="background.default"

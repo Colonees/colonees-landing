@@ -1,11 +1,11 @@
 import React from 'react';
 
-function WhiteButton({  onClick, fontSize, width, borderColor, border, fontColor,backgroundColor, children }) {
+function WhiteButton({ text, onClick, fontSize, width, borderColor, border, fontColor,backgroundColor }) {
   const defaultFontSize = '16px'; // Set your default font size here
-  const defaultWidth = '15%'; // Set your default width here
+  const defaultWidth = '126px'; // Set your default width here
   const defaultBorderColor = '#0C64FC';
-  const defaultFontColor = 'black';
-  const defaultBackgroundColor = 'white';
+  const defaultFontColor = 'white';
+  const defaultBackgroundColor = ' #E93223';
 
   const buttonStyle = {
     fontSize: fontSize !== undefined ? fontSize : defaultFontSize,
@@ -16,8 +16,8 @@ function WhiteButton({  onClick, fontSize, width, borderColor, border, fontColor
   };
 
   return (
-    <button onClick={onClick} className="white-button" style={buttonStyle}>
-      <span>{children}</span>
+    <button onClick={onClick} className="custom-button" style={buttonStyle}>
+      {text}
     </button>
   );
 }

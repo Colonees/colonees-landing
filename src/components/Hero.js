@@ -1,13 +1,67 @@
-import React from "react";
+import React, { useState, useRef } from 'react';
 import { Box, Typography, Button, useTheme, useMediaQuery } from "@mui/material";
 import SolutionsSVG from "../assets/vector-12.svg"; // Import your SVG file
 import Group from "../assets/group-7.svg";
-import CustomButton from "./Button/CustomButton"
+import CustomBtn from "./Button/CustomBtn"
 import WhiteButton from "./Button/WhiteButton"
 import "./Button/CustomButton.css"
 import "./Button/WhiteButton.css"
+import Business from '../components/Popup/Business';
+import Talents from '../components/Popup/Talents';
+import {
+  Dialog,
+  DialogContent,
+  Menu,
+  MenuItem,
+  IconButton
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
+import { Link as RouterLink, animateScroll as scroll } from 'react-scroll';
 
-const Hero = ({ imageUrl }) => {
+
+const Hero = ({ imageUrl,  onLearnMoreClick}) => {
+  const [businessModalOpen, setBusinessModalOpen] = useState(false);
+  const [talentsModalOpen, setTalentsModalOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const videoRef = useRef(null); // Step 2
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleBusinessModalOpen = () => {
+    setBusinessModalOpen(true); // Open the Business modal
+  };
+
+  const handleBusinessModalClose = () => {
+    setBusinessModalOpen(false); // Close the Business modal
+  }; 
+
+  const handleTalentsModalOpen = () => {
+    setTalentsModalOpen(true); // Open the Talents modal
+  };
+
+  const handleTalentsModalClose = () => {
+    setTalentsModalOpen(false); // Close the Talents modal
+  }; 
+  
+  const scrollToTop = () => {
+    scroll.scrollToTop();
+  };
+
+  const scrollToSection = (sectionId) => {
+    scroll.scrollTo(sectionId, {
+      duration: 800,
+      offset: -100, // Adjust the offset as needed
+      smooth: 'easeInOutQuad',
+    });
+  };
+ 
+
   const containerStyle = {
     background: `url(${imageUrl}) center/cover no-repeat fixed`,
     width: "100%",
@@ -63,6 +117,15 @@ const Hero = ({ imageUrl }) => {
     alignItems: 'center', // Center vertically
    
   };
+  const typoMenu = {
+    color: '#000',
+    fontFamily: 'Outfit',
+    fontSize: '12px',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    lineHeight: '140.625%',
+  };
+
   const theme = useTheme();
 
   const isSmallScreen = useMediaQuery('(max-width:900px)');
@@ -151,18 +214,133 @@ const Hero = ({ imageUrl }) => {
         </Box>
         {!isSmallScreen && (
         <Box style={buttonContainerStyle} sx={{gap:'10px', maxwidth:'100%', width:'50%'}}>
-        <WhiteButton text="Learn more" fontSize="16px" width="15%" borderColor=" 1px solid #E93223" fontColor="red" />
-        <CustomButton text="join waitlist" fontSize="16px" width="15%" height="50px" >
-          Join waitlist
-        </CustomButton>
+           
+   
+        <WhiteButton   fontSize="14px" width="15%" borderColor=" 1px solid #E93223" fontColor="red">
+        <RouterLink to="video" smooth={true} offset={-100} duration={800}>
+          Learn more
+        </RouterLink>
+        </WhiteButton>
+         
+         
+        <CustomBtn
+              onClick={handleMenuOpen}
+              variant="outlined"
+              fontSize="14px" width="15%" 
+              text="Join waitlist"
+             
+            >
+             Join waitlist
+           
+            </CustomBtn>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+              PaperProps={{
+                style: {
+                  backgroundColor: 'white',
+                  width:'140px',
+                  marginTop:'14px',
+                  padding: '14px 23px 14px 22px',
+                  justifyContent: 'center',
+                  borderRadius: '10px',
+                  boxShadow: '20px 20px 50px 0px rgba(0, 0, 0, 0.10)',
+                  marginRight:'10px'
+
+                },
+              }}
+            >
+              <MenuItem onClick={handleBusinessModalOpen} style={typoMenu}>Join as a Business</MenuItem>
+              <MenuItem onClick={handleTalentsModalOpen} style={typoMenu}>Join as a Talent</MenuItem>
+            </Menu>
         </Box>)}
         {isSmallScreen && (
         <Box style={buttonContainerStyle} sx={{gap:'10px', maxwidth:'100%', width:'50%'}}>
-        <WhiteButton text="Learn more" fontSize="14px" width="30%" borderColor=" 1px solid #E93223" fontColor="red" />
-        <CustomButton text="Join waitlist" fontSize="14px" width="30%" height="50px" >
-          Join waitlist
-        </CustomButton>
+       
+       <WhiteButton   fontSize="14px" width="30%" borderColor=" 1px solid #E93223" fontColor="red">
+        <RouterLink to="video" smooth={true} offset={-100} duration={800}>
+          Learn more
+        </RouterLink>
+        </WhiteButton>
+        <CustomBtn
+              onClick={handleMenuOpen}
+              variant="outlined"
+              fontSize="14px" width="30%" 
+              text="Join waitlist"
+             
+            >
+             Join waitlist
+           
+            </CustomBtn>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+              PaperProps={{
+                style: {
+                  backgroundColor: 'white',
+                  width:'140px',
+                  marginTop:'14px',
+                  padding: '14px 23px 14px 22px',
+                  justifyContent: 'center',
+                  borderRadius: '10px',
+                  boxShadow: '20px 20px 50px 0px rgba(0, 0, 0, 0.10)',
+                  marginRight:'10px'
+
+                },
+              }}
+            >
+              <MenuItem onClick={handleBusinessModalOpen} style={typoMenu}>Join as a Business</MenuItem>
+              <MenuItem onClick={handleTalentsModalOpen} style={typoMenu}>Join as a Talent</MenuItem>
+            </Menu>
+        
         </Box>)}
+              {/* Talents Modal */}
+              <Box sx={{ maxWidth: '100%', width: '100%' }}>
+        <Dialog open={talentsModalOpen} onClose={handleTalentsModalClose} sx={{ maxWidth: '100vw' }}>
+          <DialogContent sx={{ marginTop: '10px',backgroundColor:'#F6F6F6', }}>
+            {/* Render the Talents component inside the modal */}
+            <Talents />
+            <IconButton
+              edge="end"
+              color="inherit"
+              onClick={handleTalentsModalClose}
+              aria-label="close"
+              sx={{
+                position: 'absolute',
+                top: 5,
+                right: 20,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogContent>
+        </Dialog>
+      </Box>
+      <Box sx={{ width: '100%' }}>
+        <Dialog open={businessModalOpen} onClose={handleBusinessModalClose} sx={{ maxWidth: '100%', width:'100%',  }}>
+          <DialogContent sx={{ marginTop: '10px', backgroundColor:'#F6F6F6',  }}>
+            {/* Render the Business component inside the modal */}
+            <Business />
+            <IconButton
+              edge="end"
+              color="inherit"
+              onClick={handleBusinessModalClose}
+              aria-label="close"
+              sx={{
+                position: 'absolute',
+                top: 5,
+                right: 20,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogContent>
+        </Dialog>
+      </Box>
+
+
       </div>
     </div>
   );
