@@ -4,6 +4,7 @@ import Logo from '../assets/colonees-logo-11.svg';
 import Image1 from '../assets/social-links.svg';
 import CustomButton from './Button/CustomButton';
 import './Button/CustomButton.css';
+import Arrow from '../assets/arrow.png'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Link as RouterLink, animateScroll as scroll } from 'react-scroll';
 
@@ -32,7 +33,7 @@ function Footer() {
   const handleSubmit = () => {
     setLoading(true);
 
-    fetch('https://colonees-backend2023-de3e223a18ff.herokuapp.com/api/subcriber/', {
+    fetch('https://colonees-backend2023-de3e223a18ff.herokuapp.com/api/subscriber/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -180,13 +181,24 @@ function Footer() {
     }}}>
                     +234-806-471-3542
                   </Typography> 
-                  <Typography variant="h4" style={txtStyle} sx={{marginTop:'10px', fontSize: {
+                  <Typography
+  variant="h4"
+  style={txtStyle}
+  sx={{
+    marginTop: '10px',
+    fontSize: {
       xs: '14px', // Font size for extra small screens
       sm: '16px', // Font size for small screens
       md: '16px', // Font size for medium screens
-    }}}>
-                    info@colonees.com
-                  </Typography>
+    }
+  }}
+>
+  <a href="mailto:info@colonees.com?subject=Subject&body=Body" style={{ textDecoration: 'none', color: 'inherit' }}>
+    info@colonees.com
+  </a>
+</Typography>
+
+
                 </Grid>
               </Grid>
             </Grid>
@@ -267,14 +279,24 @@ About
     InputProps={{
       style: {
         borderColor: 'white', // Set the outline color to white
+        color: 'white',
+        fontFamily: 'Outfit',
+        fontSize: '14px',
+        fontStyle: 'normal',
+        fontWeight: '400',
+        lineHeight: '140.625%', /* 19.688px */
       },
     }}
     value={formData.email}
     onChange={(e) => handleFieldChange('email', e)}
     style={textFieldStyle}
   />
-       <CustomButton onClick={handleSubmit} text="" fontSize="20px" width="50px" height="58px">
-       <ArrowForwardIosIcon />
+       <CustomButton onClick={handleSubmit} text="" fontSize="20px" width="50px" height="55px">
+       <img
+            src={Arrow}
+           
+           
+          />
         </CustomButton>
       </Box>
                 </Grid>
