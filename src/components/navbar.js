@@ -303,14 +303,19 @@ function Navbar() {
       </AppBar>
 
       {is800px && (
-        <Drawer
-          anchor="right"
-          open={drawerOpen}
-          onClose={handleDrawerClose}
-          sx={{
-            width: '50%', // Change this value to your desired width
-          }}
-        >
+       <Drawer
+       anchor="right"
+       open={drawerOpen}
+       onClose={handleDrawerClose}
+       sx={{
+         width: '50%', // Change this value to your desired width
+       }}
+     >
+        <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
+   <IconButton onClick={handleDrawerClose}>
+     <CloseIcon />
+   </IconButton>
+ </div>
           <List
             sx={{
               backgroundColor: 'white',

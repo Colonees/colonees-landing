@@ -125,13 +125,13 @@ Talent{" "}
               {!isSmallScreen && (
               <Box sx={{maxWidth:'100%', width:'100%'}}>
               <CustomButton onClick={handleTalentsModalOpen} text="Join waitliist" fontSize="14px" width="30%" height="50px">
-                join waitlist
+                Join waitlist
               </CustomButton>
               </Box>)}
               {isSmallScreen && (
               <Box sx={{maxWidth:'100%', width:'100%', display: 'flex', justifyContent: 'center' }}>
               <CustomButton onClick={handleTalentsModalOpen} text="Join waitliist" fontSize="14px" width="40%" height="50px">
-                join waitlist
+                Join waitlist
               </CustomButton>
               </Box>)}
             </Box>

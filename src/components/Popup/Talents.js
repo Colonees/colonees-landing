@@ -122,7 +122,7 @@ function Talents() {
               marginTop: '68px',
             }}
           >
-            Join as a <span style={redText}>Talents</span>
+            Join as a <span style={redText}>Talent</span>
           </Typography>
         </Box>
         <Box sx={{ marginLeft: '50%', maxWidth: '30%', width: '25%' }}>
@@ -135,7 +135,12 @@ function Talents() {
                 sx={{
                   color: 'black',
                   fontFamily: 'Outfit',
-                  fontSize: '22px',
+                  fontSize: {
+                    xs: '17px',
+                    sm: '18px',
+                    md: '22px',
+                    lg: '22px',
+                  },
                   fontStyle: 'normal',
                   fontWeight: '400',
                   lineHeight: '103%',
@@ -162,7 +167,7 @@ function Talents() {
                     Full name
                   </Typography>
                   <TextField
-                    label="John doe"
+                    label="John Doe"
                     variant="outlined"
                     fullWidth
                     InputLabelProps={{ style: labelStyle }}
@@ -190,7 +195,7 @@ function Talents() {
                     Industry
                   </Typography>
                   <TextField
-                    label="Tech or Non tech"
+                    label="Ex: Technology"
                     variant="outlined"
                     fullWidth
                     InputLabelProps={{ style: labelStyle }}
@@ -250,7 +255,7 @@ function Talents() {
                     Role
                   </Typography>
                   <TextField
-                    label="Designation"
+                    label="Ex: Designer"
                     variant="outlined"
                     fullWidth
                     InputLabelProps={{ style: labelStyle }}
