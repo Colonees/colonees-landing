@@ -19,6 +19,6 @@ white-space: nowrap; /* Prevent text from wrapping */
   }
   
   .custom-button:hover {
-    background-color: #E93223; /* Change color on hover */
+    background-color: blue; /* Change color on hover */
   }
   

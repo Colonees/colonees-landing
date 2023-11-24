@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS for the predefined animations
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import Svg1 from "../assets/circleuser-1.svg"; // Import your SVG files
 import Svg2 from "../assets/circleuser-1.svg";
@@ -12,7 +14,14 @@ import Frame4 from "../assets/Frame4.png";
 
 
 const MyComponent = () => {
-  
+  useEffect(() => {
+    AOS.init({
+      // Global settings for AOS
+      duration: 1000, // Duration of animation in milliseconds
+      easing: 'ease-in-out', // Type of easing
+      once: false, // Whether the animation should occur only once
+    });
+  }, []);
 
   const svgStyle = {
     width: "80px",
@@ -47,7 +56,11 @@ const MyComponent = () => {
   };
 
   return (
-    <div style={boxContainerStyle} id="why-colonees">
+    <div style={boxContainerStyle} id="why-colonees"
+    data-aos="fade-up" // Example animation type ("fade-up", "fade-down", etc.)
+    data-aos-duration="9000" // Override duration for this specific element
+    data-aos-offset="200" // Offset (in pixels) from the original trigger point
+    >
     <Box
       p={2}
     bgcolor="background.default"
@@ -206,12 +219,20 @@ const MyComponent = () => {
               <Paper elevation={0} sx={{ marginTop: "50px" }}>
                 <Box p={2}>
                   <Box>
-                    <Box sx={{ marginTop: "10%" }}>
+                    <Box sx={{ marginTop: "10%" }}
+                     data-aos="zoom-in"
+                     data-aos-duration="800"
+                     data-aos-delay="800"
+                    >
                       <img src={Frame} alt="" style={responsiveImageStyle} />
                     </Box>
                   </Box>
                   <Box>
-                    <Box sx={{ marginTop: "10%" }}>
+                    <Box sx={{ marginTop: "10%" }}
+                     data-aos="zoom-in"
+                     data-aos-duration="800"
+                     data-aos-delay="800"
+                    >
                       <img src={Frame2} alt="" style={responsiveImageStyle} />
                     </Box>
                   </Box>
@@ -219,14 +240,22 @@ const MyComponent = () => {
               </Paper>
             </Box>
             <Box flex="1">
-              <Paper elevation={0} sx={{ maxWidth: "100%", width: "100%" }}>
+              <Paper elevation={0} sx={{ maxWidth: "100%", width: "100%" }}
+              >
                 <Box p={2}>
-                  <Box>
+                  <Box
+                   data-aos="zoom-in"
+                   data-aos-duration="800"
+                   data-aos-delay="800"
+                  >
                     <img src={Frame3} alt="" style={responsiveImageStyle} />
                     <Box></Box>
                   </Box>
                   <Box
                     sx={{ marginTop: "10%", maxWidth: "100%", width: "100%" }}
+                    data-aos="zoom-in"
+                    data-aos-duration="800"
+                    data-aos-delay="800"
                   >
                     <img src={Frame4} alt="" style={responsiveImageStyle} />
                     <Box></Box>
