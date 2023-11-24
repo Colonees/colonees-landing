@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS for the predefined animations
 import { Box, Typography } from "@mui/material";
 import col_vid from "../assets/col-vid.mp4";
 import play_icon_path from "../assets/play.png";
 
 const Video = () => {
+  useEffect(() => {
+    AOS.init({
+      // Global settings for AOS
+      easing: 'ease-in-out', // Type of easing
+      once: false, // Whether the animation should occur only once
+    });
+  }, []);
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlay = () => {
@@ -39,7 +48,11 @@ const Video = () => {
   };
 
   return (
-    <div id="video">
+    <div id="video"
+    data-aos="fade-up" // Example animation type ("fade-up", "fade-down", etc.)
+    data-aos-duration="9000" // Override duration for this specific element
+    data-aos-offset="200" // Offset (in pixels) from the original trigger point
+    >
     <Box style={containerStyle}>
       <Typography
         variant="h4"

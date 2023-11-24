@@ -143,7 +143,12 @@ function Business() {
                 sx={{
                   color: 'black',
                   fontFamily: 'Outfit',
-                  fontSize: '22px',
+                  fontSize: {
+                    xs: '17px',
+                    sm: '18px',
+                    md: '22px',
+                    lg: '22px',
+                  },
                   fontStyle: 'normal',
                   fontWeight: '400',
                   lineHeight: '103%',
@@ -170,7 +175,7 @@ function Business() {
                     Full name
                   </Typography>
                   <TextField
-                    label="John doe"
+                    label="John Doe"
                     variant="outlined"
                     fullWidth
                     InputLabelProps={{ style: labelStyle }}
@@ -198,7 +203,7 @@ function Business() {
                     Business Name
                   </Typography>
                   <TextField
-                    label="Business Name"
+                    label="Ex: Apple"
                     variant="outlined"
                     fullWidth
                     InputLabelProps={{ style: labelStyle }}
@@ -229,7 +234,7 @@ function Business() {
                     Email Address
                   </Typography>
                   <TextField
-                    label="JOhnDoe@email.com"
+                    label="name@company.com"
                     variant="outlined"
                     fullWidth
                     InputLabelProps={{ style: labelStyle }}
@@ -258,7 +263,7 @@ function Business() {
                     Designation
                   </Typography>
                   <TextField
-                    label="Designation"
+                    label="Ex: Fintech"
                     variant="outlined"
                     fullWidth
                     InputLabelProps={{ style: labelStyle }}

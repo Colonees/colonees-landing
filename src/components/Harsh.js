@@ -1,55 +1,78 @@
-import React from 'react'
-import { Box, Typography, Button } from '@mui/material';
-import Image1 from '../assets/logotransparent1320x41211024x320-1-1@2x.png'; // Import your image files
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS for the predefined animations
+import { Box } from '@mui/material';
+import Image1 from '../assets/logotransparent1320x41211024x320-1-1@2x.png';
 import Image2 from '../assets/download--1-removebgpreview-2-1-1@2x.png';
 import Image3 from '../assets/hgdfknv-1-1@2x.png';
 import Image4 from '../assets/a-1@2x.png';
 
 function Harsh() {
-    const blackBoxStyle = {
-        background: '#F6F6F6',
-        width: '100%',
-        height:'auto',
-        maxWidth: '100%',
-        padding: '20px 0', // Add padding to create space between buttons and images
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop:'100px',
-      };
-    
-      const imageContainerStyle = {
-        display: 'flex',
-        justifyContent: 'space-between', // To arrange images in a row with space in between
-        alignItems: 'center', // To center images vertically
-       // Adjust this value to control the width of the images
-        maxWidth:'100%',
-       
-      };
-    
-      const imageStyle = {
-        width: '10%',
-        maxWidth:'10%', // Adjust the width of the images as needed
-        height: 'auto', // Maintain aspect ratio
-        opacity: 0.5,
-      };
-     
+  useEffect(() => {
+    AOS.init({
+      // Global settings for AOS
+      duration: 1000, // Duration of animation in milliseconds
+      easing: 'ease-in-out', // Type of easing
+      once: false, // Whether the animation should occur only once
+    });
+  }, []);
+  useEffect(() => {
+    const images = document.querySelectorAll('.zooming-image');
+
+    const toggleZoom = () => {
+      images.forEach((image, index) => {
+        const delay = index * 200; // Adjust delay for each image
+        setTimeout(() => {
+          image.classList.toggle('zoom-in');
+          image.classList.toggle('zoom-out');
+        }, delay);
+      });
+    };
+
+    const interval = setInterval(toggleZoom, 3000); // Adjust interval duration
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div>
-         <Box style={blackBoxStyle}>
-    <Box style={imageContainerStyle} sx={{ width: {
-              xs: "93%", // Font size for extra small screens
-              sm: "93%", // Font size for small screens
-              md: "80%", // Font size for medium screens
-              lg:"60%"
-            },}}>
-      <img src={Image1} alt="Image 1" style={imageStyle} />
-      <img src={Image2} alt="Image 2" style={imageStyle} />
-      <img src={Image3} alt="Image 3" style={imageStyle} />
-      <img src={Image4} alt="Image 4" style={imageStyle} />
-    </Box>
-  </Box>
+    <div  data-aos="fade-up" // Example animation type ("fade-up", "fade-down", etc.)
+    data-aos-duration="9000" // Override duration for this specific element
+    data-aos-offset="200" // Offset (in pixels) from the original trigger point
+    >
+      <Box
+        sx={{
+          background: '#F6F6F6',
+          width: '100%',
+          height: 'auto',
+          maxWidth: '100%',
+          padding: '20px 0',
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '100px',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            maxWidth: '100%',
+            width: {
+              xs: '93%',
+              sm: '93%',
+              md: '80%',
+              lg: '60%',
+            },
+          }}
+        >
+          <img src={Image1} alt="Image 1" className="zooming-image" />
+          <img src={Image2} alt="Image 2" className="zooming-image" />
+          <img src={Image3} alt="Image 3" className="zooming-image" />
+          <img src={Image4} alt="Image 4" className="zooming-image" />
+        </Box>
+      </Box>
     </div>
-  )
+  );
 }
 
-export default Harsh
+export default Harsh;

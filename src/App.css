@@ -24,6 +24,44 @@
   color: white;
 }
 
+/* Define CSS animations for zoom-in and zoom-out */
+@keyframes zoom-in {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(2.1);
+  }
+}
+
+@keyframes zoom-out {
+  from {
+    transform: scale(2.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Apply the animations to the images */
+.zooming-image {
+  width: 10%;
+  max-width: 10%;
+  height: auto;
+  opacity: 0.5;
+  animation: zoom-in-out 4s infinite alternate; /* Apply continuous animation */
+}
+
+/* Set animation for zoom-in and zoom-out */
+.zooming-image.zoom-in {
+  animation-name: zoom-in;
+}
+
+.zooming-image.zoom-out {
+  animation-name: zoom-out;
+}
+
+
 .App-link {
   color: #61dafb;
 }

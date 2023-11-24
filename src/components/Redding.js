@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS for the predefined animations
 import { Box, Grid, Paper, Typography,  useTheme, useMediaQuery } from "@mui/material";
 import frame21 from '../assets/frame21.png';
 import WhiteButton from './Button/WhiteButton';
@@ -11,6 +13,14 @@ import {
 import Business from '../components/Popup/Business';
 import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
 function Bluesy() {
+  useEffect(() => {
+    AOS.init({
+      // Global settings for AOS
+      duration: 1000, // Duration of animation in milliseconds
+      easing: 'ease-in-out', // Type of easing
+      once: false, // Whether the animation should occur only once
+    });
+  }, []);
   const [businessModalOpen, setBusinessModalOpen] = useState(false);
   
 
@@ -34,9 +44,9 @@ function Bluesy() {
         display: 'flex',
         justifyContent: 'center', // Center horizontally
         alignItems: 'center',
-       
+       overflow:'hidden',
         maxwidth:'100%',
-        minHeight: 'auto',
+       height:'90%',
         borderRadius:'50px',
        
     };
@@ -44,7 +54,11 @@ function Bluesy() {
 
   const isSmallScreen = useMediaQuery('(max-width:900px)');
   return (
-    <div>
+    <div
+    data-aos="fade-up" // Example animation type ("fade-up", "fade-down", etc.)
+    data-aos-duration="9000" // Override duration for this specific element
+    data-aos-offset="200" // Offset (in pixels) from the original trigger point
+    >
         <Box sx={{marginTop:'60px'}}>
           <div style={boxContainerStyle}>
           <Box style={boxStyle} sx={{
@@ -59,13 +73,13 @@ function Bluesy() {
         <Grid item xs={12} sm={12} md={6}  sx={{ marginTop:{
            xs: "34px",
            sm: "34px",
-           md: "120px",
-           lg: "120px",
+           md: "100px",
+           lg: "100px",
         }, marginBottom:{
            xs: "20px",
            sm: "20px",
-           md: "100px",
-           lg: "100px",
+           md: "0px",
+           lg: "0px",
         } }}>
          
             <Box p={2} sx={{    marginLeft: {
@@ -167,8 +181,11 @@ Business{" "}
               xs: 300,  // Specify different heights for different screen sizes
               sm: 400,
               md: 400,
-              lg: 500,
+              lg: 450,
             },}}
+            data-aos="zoom-in"
+            data-aos-duration="1000"
+            data-aos-delay="1000"
           >
              <img
             src={frame21}

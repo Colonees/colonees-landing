@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef,  useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS for the predefined animations
 import { Box, Typography, Button, useTheme, useMediaQuery } from "@mui/material";
 import SolutionsSVG from "../assets/vector-12.svg"; // Import your SVG file
 import Group from "../assets/group-7.svg";
@@ -24,6 +26,25 @@ const Hero = ({ imageUrl,  onLearnMoreClick}) => {
   const [talentsModalOpen, setTalentsModalOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const videoRef = useRef(null); // Step 2
+
+  const [showImage, setShowImage] = useState(true);
+  useEffect(() => {
+    AOS.init({
+      // Global settings for AOS
+      duration: 800, // Duration of animation in milliseconds
+      easing: 'ease-in-out', // Type of easing
+      once: true, // Whether the animation should occur only once
+    });
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowImage((prevShowImage) => !prevShowImage);
+    }, 2000); // Change the duration as needed (in milliseconds)
+
+    return () => clearInterval(interval);
+  }, []);
+
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -130,8 +151,13 @@ const Hero = ({ imageUrl,  onLearnMoreClick}) => {
 
   const isSmallScreen = useMediaQuery('(max-width:900px)');
   return (
-    <div style={containerStyle}>
-      <div className="colonees-container">
+    <div style={containerStyle}
+    data-aos="fade-up" // Example animation type ("fade-up", "fade-down", etc.)
+    data-aos-duration="6000" // Override duration for this specific element
+    data-aos-offset="200" // Offset (in pixels) from the original trigger point
+    >
+      <div className="colonees-container"
+      >
         <Box sx={{
           maxWidth:'100%',  width: {
             xs: "85%", // Font size for extra small screens
@@ -206,10 +232,15 @@ const Hero = ({ imageUrl,  onLearnMoreClick}) => {
               md: "80%", // Font size for medium screens
               lg:"60%"
             }, }}>
-          <img
+           <img
             src={Group}
             alt="Groups"
-            style={{ width: "100%", maxWidth: "100%" }}
+            style={{
+              width: "100%",
+              maxWidth: "100%",
+              opacity: showImage ? 1 : 0, // Use opacity based on showImage state
+              transition: 'opacity 1s ease-in-out' // Smooth transition effect
+            }}
           />
         </Box>
         {!isSmallScreen && (

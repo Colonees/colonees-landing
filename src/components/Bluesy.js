@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS for the predefined animations
 import { Box, Grid, Paper, Typography,  useTheme, useMediaQuery } from "@mui/material";
 import frame22 from '../assets/frame22.png'
 import CustomButton from './Button/CustomButton'
@@ -11,6 +13,14 @@ import {
 import Talents from '../components/Popup/Talents';
 import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
 function Bluesy() {
+  useEffect(() => {
+    AOS.init({
+      // Global settings for AOS
+      duration: 1000, // Duration of animation in milliseconds
+      easing: 'ease-in-out', // Type of easing
+      once: false, // Whether the animation should occur only once
+    });
+  }, []);
   const [talentsModalOpen, setTalentsModalOpen] = useState(false);
   
 
@@ -45,7 +55,11 @@ function Bluesy() {
   const isSmallScreen = useMediaQuery('(max-width:900px)');
 
   return (
-    <div>
+    <div
+    data-aos="fade-up" // Example animation type ("fade-up", "fade-down", etc.)
+    data-aos-duration="9000" // Override duration for this specific element
+    data-aos-offset="200" // Offset (in pixels) from the original trigger point
+    >
         <Box sx={{marginTop:'60px'}}>
         <div style={boxContainerStyle}>
         <Box style={boxStyle} sx={{
@@ -125,13 +139,13 @@ Talent{" "}
               {!isSmallScreen && (
               <Box sx={{maxWidth:'100%', width:'100%'}}>
               <CustomButton onClick={handleTalentsModalOpen} text="Join waitliist" fontSize="14px" width="30%" height="50px">
-                join waitlist
+                Join waitlist
               </CustomButton>
               </Box>)}
               {isSmallScreen && (
               <Box sx={{maxWidth:'100%', width:'100%', display: 'flex', justifyContent: 'center' }}>
               <CustomButton onClick={handleTalentsModalOpen} text="Join waitliist" fontSize="14px" width="40%" height="50px">
-                join waitlist
+                Join waitlist
               </CustomButton>
               </Box>)}
             </Box>
@@ -142,6 +156,9 @@ Talent{" "}
             display="flex"
             flexDirection="row"
             sx={{ maxWidth: "100%", width: "100%", marginLeft:"8px" }}
+            data-aos="zoom-in"
+            data-aos-duration="1000"
+            data-aos-delay="1000"
           >
              <img
             src={frame22}
