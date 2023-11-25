@@ -46,7 +46,7 @@ function Bluesy() {
         alignItems: 'center',
        overflow:'hidden',
         maxwidth:'100%',
-       height:'90%',
+       height:'auto',
         borderRadius:'50px',
        
     };
@@ -69,11 +69,11 @@ function Bluesy() {
             lg : "80%",
           }
         }}>
-        <Grid container spacing={2} sx={{ maxWidth: "100%", width: "100%",  }}>
+        <Grid container spacing={0} sx={{ maxWidth: "100%", width: "100%",  }}>
         <Grid item xs={12} sm={12} md={6}  sx={{ marginTop:{
            xs: "34px",
            sm: "34px",
-           md: "100px",
+           md: "80px",
            lg: "100px",
         }, marginBottom:{
            xs: "20px",
@@ -127,10 +127,10 @@ Business{" "}
                   color: "white",
                   fontFamily: "Outfit",
                   fontSize: {
-                    xs: "14px",
-                    sm: "14px",
-                    md: "14px",
-                    lg: "20px",
+                    xs: "13px",
+                    sm: "13px",
+                    md: "13px",
+                    lg: "18px",
                   },
                  
                   textAlign: {
@@ -171,18 +171,13 @@ Business{" "}
         <Grid item xs={12} sm={12} md={6} sx={{ marginTop:{
           xs: "0px",
           sm : "0px",
-          md: "100px",
-          lg: "100px",
+          md: "77px",
+          lg: "77px",
         } }}>
           <Box
             display="flex"
             flexDirection="row"
-            sx={{ maxWidth: "100%", width: "100%", height: {
-              xs: 300,  // Specify different heights for different screen sizes
-              sm: 400,
-              md: 400,
-              lg: 450,
-            },}}
+            sx={{ maxWidth: "100%", width: "100%", }}
             data-aos="zoom-in"
             data-aos-duration="1000"
             data-aos-delay="1000"
@@ -190,7 +185,7 @@ Business{" "}
              <img
             src={frame21}
             alt="Groups"
-            style={{ width: "100%", maxWidth: "100%", marginLeft:'8px'}}
+            style={{ width: "100%", maxWidth: "100%", marginLeft:'8px', height:'auto'}}
           />
           </Box>
         </Grid>

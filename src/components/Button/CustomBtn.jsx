@@ -1,25 +1,25 @@
 import React from 'react';
 
-function WhiteButton({ text, onClick, fontSize, width, borderColor, border, fontColor,backgroundColor }) {
-  const defaultFontSize = '16px'; // Set your default font size here
-  const defaultWidth = '126px'; // Set your default width here
-  const defaultBorderColor = '#0C64FC';
-  const defaultFontColor = 'white';
-  const defaultBackgroundColor = ' #E93223';
+
+function CustomButton({ text, onClick, fontSize, width, height,children }) {
+  const defaultFontSize = '12px'; // Set your default font size here
+  const defaultWidth = ' '; // Set your default width here
+  const defaultHeight = '';
 
   const buttonStyle = {
+   
+    // ... (existing styles)
     fontSize: fontSize !== undefined ? fontSize : defaultFontSize,
     width: width !== undefined ? width : defaultWidth,
-    border: border !== undefined ? border : ` ${borderColor || defaultBorderColor}`,
-    color: fontColor || defaultFontColor, 
-    backgroundColor: backgroundColor || defaultBackgroundColor, 
+    height: height!== undefined ? height : defaultHeight,
   };
+  
 
   return (
     <button onClick={onClick} className="custom-button" style={buttonStyle}>
-      {text}
+      <span>{children}</span>
     </button>
   );
 }
 
-export default WhiteButton;
+export default CustomButton;
