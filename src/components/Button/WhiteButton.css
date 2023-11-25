@@ -8,6 +8,8 @@
     flex-shrink: 0;
     border-radius: 8px;
 text-align: center;
+background: transparent;
+border-radius: 8px;
 font-family: 'Outfit';
 font-style: normal;
 font-weight: 600;
@@ -15,7 +17,8 @@ line-height: 30px; /* 187.5% */
 white-space: nowrap; /* Prevent text from wrapping */
     }
     
-    .custom-button:hover {
+    .white-button:hover {
       background-color: #0056b3; /* Change color on hover */
+      color:'white'
     }
     

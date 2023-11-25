@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS for the predefined animations
 import { Box, Typography, TextField, Button, Container, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
 import CustomButton from './Button/CustomButton'
@@ -13,6 +15,14 @@ import {
 } from '@mui/material';
 
 const Scales = () => {
+  useEffect(() => {
+    AOS.init({
+      // Global settings for AOS
+      duration: 800, // Duration of animation in milliseconds
+      easing: 'ease-in-out', // Type of easing
+      once: false, // Whether the animation should occur only once
+    });
+  }, []);
   const [businessModalOpen, setBusinessModalOpen] = useState(false);
   const [talentsModalOpen, setTalentsModalOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -93,7 +103,11 @@ const Scales = () => {
   };
 
   return (
-    <Box style={containerStyle}>
+    <Box style={containerStyle}
+    data-aos="fade-up" // Example animation type ("fade-up", "fade-down", etc.)
+    data-aos-duration="9000" // Override duration for this specific element
+    data-aos-offset="200" // Offset (in pixels) from the original trigger point
+    >
       <Typography variant="h4" gutterBottom style={textStyle} sx={{
         fontSize: {
           xs: '34px',
@@ -101,7 +115,11 @@ const Scales = () => {
           md: '40px',
           lg: "64px",
         },
-      }}>
+      }}
+      data-aos="fade-up" // Example animation type ("fade-up", "fade-down", etc.)
+      data-aos-duration="9000" // Override duration for this specific element
+      data-aos-offset="200" // Offset (in pixels) from the original trigger point
+      >
         Ready to build or join a fully dedicated remote tech or non-tech team?
       </Typography>
       <Typography variant="h4" gutterBottom style={txtStyle} sx={{
@@ -117,7 +135,11 @@ const Scales = () => {
           md: '40%',
           lg: "30%",
         },
-      }}>
+      }}
+      data-aos="fade-up" // Example animation type ("fade-up", "fade-down", etc.)
+      data-aos-duration="9000" // Override duration for this specific element
+      data-aos-offset="200" // Offset (in pixels) from the original trigger point
+      >
         Join our waitlist today to be among the first to receive the offers of joining early!
       </Typography>
       <Box style={buttonContainerStyle}>

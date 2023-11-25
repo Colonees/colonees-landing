@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS for the predefined animations
 import { Box, Grid, Typography, TextField, ThemeProvider, createTheme } from '@mui/material';
 import Logo from '../assets/colonees-logo-11.svg';
 import Image1 from '../assets/social-links.svg';
@@ -11,6 +13,14 @@ import { Link as RouterLink, animateScroll as scroll } from 'react-scroll';
 
 
 function Footer() {
+
+  useEffect(() => {
+    AOS.init({
+      // Global settings for AOS
+      easing: 'ease-in-out', // Type of easing
+      once: false, // Whether the animation should occur only once
+    });
+  }, []);
   const [formData, setFormData] = useState({
     email: '',
     subscribe: true,
@@ -167,7 +177,11 @@ function Footer() {
     <ThemeProvider theme={theme}>
     <div>
       <Box sx={{ marginTop: '120px', backgroundColor: '#0A142F', height:'auto', display:'flex', justifyContent:'center' }}>
-        <Box style={boxStyle}>
+        <Box style={boxStyle}
+        data-aos="fade-up" // Example animation type ("fade-up", "fade-down", etc.)
+        data-aos-duration="9000" // Override duration for this specific element
+        data-aos-offset="200" // Offset (in pixels) from the original trigger point
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={3} sx={{marginTop:'60px'}}>
               <Grid container justifyContent="center">
