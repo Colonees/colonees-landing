@@ -45,7 +45,7 @@ function Bluesy() {
         alignItems: 'center',
        
         maxwidth:'100%',
-        height:'623px',
+        height:'523px',
         borderRadius:'50px',
         
     };
