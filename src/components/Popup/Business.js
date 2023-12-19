@@ -30,7 +30,7 @@ function Business() {
   const handleSubmit = () => {
     setLoading(true);
 
-    fetch('https://colonees-backend2023-de3e223a18ff.herokuapp.com/api/business-waitlist/', {
+    fetch('http://apicolonees.com/api/business-waitlist/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

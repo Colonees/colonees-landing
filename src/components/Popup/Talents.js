@@ -30,7 +30,7 @@ function Talents() {
   const handleSubmit = () => {
     setLoading(true);
   
-    fetch('https://colonees-backend2023-de3e223a18ff.herokuapp.com/api/talent-waitlist/', {
+    fetch('http://apicolonees.com/api/talent-waitlist/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
