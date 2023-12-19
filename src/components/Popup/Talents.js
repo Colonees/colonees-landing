@@ -30,7 +30,7 @@ function Talents() {
   const handleSubmit = () => {
     setLoading(true);
   
-    fetch('http://apicolonees.com/api/talent-waitlist/', {
+    fetch('https://apicolonees.com/api/talent-waitlist/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
