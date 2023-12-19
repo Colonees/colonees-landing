@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Box, Grid, Typography, TextField, Container, Checkbox, CircularProgress } from '@mui/material';
 import SolutionsSVG from '../../assets/vector-12.svg';
 import CustomButton from '../Button/CustomButton';
@@ -10,7 +10,7 @@ function Talents() {
     email: '',
     industry: '',
     designation: '',
-    subscribe: false,
+    subscribed: false,
   });
   const [loading, setLoading] = useState(false);
   const [logMessages, setLogMessages] = useState([]);
@@ -29,7 +29,7 @@ function Talents() {
 
   const handleSubmit = () => {
     setLoading(true);
-
+  
     fetch('https://colonees-backend2023-de3e223a18ff.herokuapp.com/api/talent-waitlist/', {
       method: 'POST',
       headers: {
@@ -60,7 +60,17 @@ function Talents() {
         setLoading(false);
       });
   };
-
+  
+  // Add this at the end of your component
+  useEffect(() => {
+    // This code will run after the component renders and the page reloads
+    window.onload = () => {
+      // Show an alert after the window reloads
+      window.alert('Form filled successfully');
+    };
+  }, []);
+  
+  
   const boxSyle = {
     backgroundColor: '#F6F6F6',
     width: '100%',
