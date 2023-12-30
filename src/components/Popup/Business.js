@@ -44,29 +44,28 @@ function Business() {
       }),
     })
     .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then((response) => {
-      if (!response.ok) {
+      if (response.status === 400) {
+        throw new Error('Email already exists');
+      } else if (response.status === 500) {
+        throw new Error('Network problem, please try again');
+      } else if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       return response.json();
     })
     .then((data) => {
-      addToLog('Form data sent successfully');
+      alert(`Form data sent successfully:\n${JSON.stringify(data)}`);
       // Reload the page after successful form submission
       window.location.reload();
     })
     .catch((error) => {
-      addToLog(`Fetch error: ${error}`);
+      // Show the fetch error in an alert
+      alert(` ${error}`);
     })
     .finally(() => {
       setLoading(false);
     });
-};
+  };
 
 // Add this at the end of your component
 useEffect(() => {

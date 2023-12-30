@@ -42,34 +42,29 @@ function Talents() {
         designation: formData.designation,
       }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        addToLog('Form data sent successfully');
-        // Reload the page after successful form submission
-        window.location.reload();
-      })
-      .catch((error) => {
-        addToLog(`Fetch error: ${error}`);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    .then((response) => {
+      if (response.status === 400) {
+        throw new Error('Email already exists');
+      } else if (response.status === 500) {
+        throw new Error('Network problem, please try again');
+      } else if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      alert(`Form data sent successfully:\n${JSON.stringify(data)}`);
+      // Reload the page after successful form submission
+      window.location.reload();
+    })
+    .catch((error) => {
+      // Show the fetch error in an alert
+      alert(` ${error}`);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
   };
-  
-  // Add this at the end of your component
-  useEffect(() => {
-    // This code will run after the component renders and the page reloads
-    window.onload = () => {
-      // Show an alert after the window reloads
-      window.alert('Form filled successfully');
-    };
-  }, []);
-  
   
   const boxSyle = {
     backgroundColor: '#F6F6F6',
