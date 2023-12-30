@@ -53,7 +53,7 @@ function Talents() {
       return response.json();
     })
     .then((data) => {
-      alert(`${JSON.stringify(data)}`);
+      alert(`Successfully joined talent waitlist`);
       // Reload the page after successful form submission
       window.location.reload();
     })
@@ -104,6 +104,7 @@ function Talents() {
 
   return (
     <div>
+      
       <Box style={boxSyle}>
         <Box sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
           <Typography
