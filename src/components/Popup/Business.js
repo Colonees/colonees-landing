@@ -54,7 +54,7 @@ function Business() {
       return response.json();
     })
     .then((data) => {
-      alert(`${JSON.stringify(data)}`);
+      alert(`Successfully joined Business waitlist`);
       // Reload the page after successful form submission
       window.location.reload();
     })
@@ -66,16 +66,6 @@ function Business() {
       setLoading(false);
     });
   };
-
-// Add this at the end of your component
-useEffect(() => {
-  // This code will run after the component renders and the page reloads
-  window.onload = () => {
-    // Show an alert after the window reloads
-    window.alert('Form filled successfully');
-  };
-}, []);
-
 
   const boxStyle = {
     backgroundColor: '#F6F6F6',
