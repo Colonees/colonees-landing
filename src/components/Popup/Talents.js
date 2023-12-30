@@ -53,7 +53,7 @@ function Talents() {
       return response.json();
     })
     .then((data) => {
-      alert(`Form data sent successfully:\n${JSON.stringify(data)}`);
+      alert(`${JSON.stringify(data)}`);
       // Reload the page after successful form submission
       window.location.reload();
     })
@@ -104,11 +104,6 @@ function Talents() {
 
   return (
     <div>
-      <div ref={logContainerRef}>
-        {logMessages.map((message, index) => (
-          <div key={index}>{message}</div>
-        ))}
-      </div>
       <Box style={boxSyle}>
         <Box sx={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
           <Typography
