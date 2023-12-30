@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Box, Grid, Typography, TextField, Container, Checkbox, CircularProgress } from '@mui/material';
 import SolutionsSVG from '../../assets/vector-12.svg';
 import CustomButton from '../Button/CustomButton';
@@ -10,7 +10,7 @@ function Talents() {
     email: '',
     industry: '',
     designation: '',
-    subscribe: false,
+    subscribed: false,
   });
   const [loading, setLoading] = useState(false);
   const [logMessages, setLogMessages] = useState([]);
@@ -29,8 +29,8 @@ function Talents() {
 
   const handleSubmit = () => {
     setLoading(true);
-
-    fetch('https://colonees-backend2023-de3e223a18ff.herokuapp.com/api/talent-waitlist/', {
+  
+    fetch('https://api.colonees.com/api/talent-waitlist/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,25 +42,30 @@ function Talents() {
         designation: formData.designation,
       }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        addToLog('Form data sent successfully');
-        // Reload the page after successful form submission
-        window.location.reload();
-      })
-      .catch((error) => {
-        addToLog(`Fetch error: ${error}`);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    .then((response) => {
+      if (response.status === 400) {
+        throw new Error('Email already exists');
+      } else if (response.status === 500) {
+        throw new Error('Network problem, please try again');
+      } else if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      alert(`Form data sent successfully:\n${JSON.stringify(data)}`);
+      // Reload the page after successful form submission
+      window.location.reload();
+    })
+    .catch((error) => {
+      // Show the fetch error in an alert
+      alert(` ${error}`);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
   };
-
+  
   const boxSyle = {
     backgroundColor: '#F6F6F6',
     width: '100%',

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Box, Grid, Typography, TextField, Container, Checkbox, CircularProgress } from '@mui/material';
 import SolutionsSVG from '../../assets/vector-12.svg';
 import CustomButton from '../Button/CustomButton';
@@ -9,8 +9,8 @@ function Business() {
     full_name: '',
     email: '',
     business_name: '',
-    designation: '',
-    subscribe: false,
+    business_industry: '',
+    subscribed: false,
   });
   const [loading, setLoading] = useState(false);
   const [logMessages, setLogMessages] = useState([]);
@@ -30,7 +30,7 @@ function Business() {
   const handleSubmit = () => {
     setLoading(true);
 
-    fetch('https://colonees-backend2023-de3e223a18ff.herokuapp.com/api/business-waitlist/', {
+    fetch('https://api.colonees.com/api/business-waitlist/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,28 +39,43 @@ function Business() {
         full_name: formData.full_name,
         email: formData.email,
         business_name: formData.business_name,
-        designation: formData.designation,
-        subscribe: formData.subscribe,
+        business_industry: formData.business_industry,
+        subscribed: formData.subscribed,
       }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        addToLog('Form data sent successfully');
-        // Reload the page after successful form submission
-        window.location.reload();
-      })
-      .catch((error) => {
-        addToLog(`Fetch error: ${error}`);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    .then((response) => {
+      if (response.status === 400) {
+        throw new Error('Email already exists');
+      } else if (response.status === 500) {
+        throw new Error('Network problem, please try again');
+      } else if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      alert(`Form data sent successfully:\n${JSON.stringify(data)}`);
+      // Reload the page after successful form submission
+      window.location.reload();
+    })
+    .catch((error) => {
+      // Show the fetch error in an alert
+      alert(` ${error}`);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
   };
+
+// Add this at the end of your component
+useEffect(() => {
+  // This code will run after the component renders and the page reloads
+  window.onload = () => {
+    // Show an alert after the window reloads
+    window.alert('Form filled successfully');
+  };
+}, []);
+
 
   const boxStyle = {
     backgroundColor: '#F6F6F6',
@@ -271,7 +286,7 @@ function Business() {
                       style: inputFieldStyle,
                     }}
                     value={formData.designation}
-                    onChange={(e) => handleFieldChange('designation', e)}
+                    onChange={(e) => handleFieldChange('business_industry', e)}
                     sx={{ marginTop: '10px' }}
                   />
                 </Box>
