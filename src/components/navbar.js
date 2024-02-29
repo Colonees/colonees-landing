@@ -7,6 +7,8 @@ import CustomButton from './Button/CustomButton';
 import CustomBtn from './Button/CustomBtn'
 import './Button/CustomButton.css';
 import CloseIcon from '@mui/icons-material/Close'; // Import CloseIcon
+import { Link } from "react-router-dom";
+
 
 import {
   AppBar,
@@ -121,6 +123,7 @@ function Navbar() {
             
           }}
         >
+          <Link to="/" >
             <img
               src={Logo}
               alt="Logo"
@@ -133,6 +136,7 @@ function Navbar() {
             }
             }}
             />
+             </Link>
           <div>
             <List
               component="nav"
