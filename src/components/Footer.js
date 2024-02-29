@@ -9,6 +9,7 @@ import './Button/CustomButton.css';
 import Arrow from '../assets/arrow.png'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Link as RouterLink, animateScroll as scroll } from 'react-scroll';
+import { Link } from "react-router-dom";
 
 
 
@@ -250,13 +251,11 @@ About
                   </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                      <Typography variant="h4" style={ttStyle} sx={{marginTop:'57px',fontSize: {
-      xs: '14px', // Font size for extra small screens
-      sm: '16px', // Font size for small screens
-      md: '16px', // Font size for medium screens
-    }}}>
-                    Privacy Policy
-                  </Typography>
+                    <Link to="/privacy-policy" style={{ textDecoration: 'none' }}>
+      <Typography variant="h4" style={ttStyle} sx={{ marginTop: '57px', fontSize: { xs: '14px', sm: '16px', md: '16px' } }}>
+        Privacy Policy
+      </Typography>
+    </Link>
                   <Typography variant="h4" style={ttStyle} sx={{marginTop:'40px',fontSize: {
       xs: '14px', // Font size for extra small screens
       sm: '16px', // Font size for small screens
@@ -340,7 +339,7 @@ About
       sm: '15px', // Font size for small screens
       md: '20px', // Font size for medium screens
     }}}>
-                Copyright ©Colonees 2023- All rights reserved
+                Copyright ©Colonees 2024 - All rights reserved
               </Typography>
                 </Grid>
               </Grid>
